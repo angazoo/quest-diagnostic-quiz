@@ -37,7 +37,6 @@
             padding: 3rem 1.5rem;
         }
 
-        /* Header */
         .quiz-header {
             text-align: center;
             margin-bottom: 3rem;
@@ -60,607 +59,147 @@
             margin: 0 auto;
         }
 
-        /* Progress */
-        .progress-container {
-            margin-bottom: 2.5rem;
-        }
+        .progress-container { margin-bottom: 2.5rem; }
+        .progress-bar { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--accent); transition: width 0.4s ease; width: 0%; }
+        .progress-text { text-align: right; font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem; }
 
-        .progress-bar {
-            height: 3px;
-            background: var(--border);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--accent);
-            transition: width 0.4s ease;
-            width: 0%;
-        }
-
-        .progress-text {
-            text-align: right;
-            font-size: 0.85rem;
-            color: var(--muted);
-            margin-top: 0.5rem;
-        }
-
-        /* Questions */
-        .question-section {
-            display: none;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .question-section.active {
-            display: block;
-        }
+        .question-section { display: none; animation: fadeIn 0.4s ease; }
+        .question-section.active { display: block; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .question-number {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--accent);
-            margin-bottom: 0.75rem;
-        }
+        .question-number { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.75rem; }
+        .question-text { font-family: 'Instrument Serif', serif; font-size: 1.5rem; margin-bottom: 0.5rem; line-height: 1.4; }
+        .question-instruction { font-size: 0.9rem; color: var(--muted); margin-bottom: 1.5rem; font-style: italic; }
 
-        .question-text {
-            font-family: 'Instrument Serif', serif;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            line-height: 1.4;
-        }
+        .options-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+        .option-item { position: relative; }
+        .option-item input { position: absolute; opacity: 0; cursor: pointer; }
+        .option-label { display: block; padding: 1rem 1.25rem; background: white; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; transition: all 0.2s ease; font-size: 0.95rem; }
+        .option-label:hover { border-color: var(--accent); background: #fff; }
+        .option-item input:checked + .option-label { border-color: var(--accent); background: var(--accent-light); }
 
-        .question-instruction {
-            font-size: 0.9rem;
-            color: var(--muted);
-            margin-bottom: 1.5rem;
-            font-style: italic;
-        }
+        .option-label::before { content: ''; display: inline-block; width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 4px; margin-right: 12px; vertical-align: middle; transition: all 0.2s ease; }
+        .option-item input:checked + .option-label::before { background: var(--accent); border-color: var(--accent); background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3E%3C/svg%3E"); }
 
-        /* Options */
-        .options-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
+        .single-select .option-label::before { border-radius: 50%; }
+        .single-select .option-item input:checked + .option-label::before { background-image: none; box-shadow: inset 0 0 0 4px white; }
 
-        .option-item {
-            position: relative;
-        }
+        .text-input-wrapper { margin-bottom: 1.5rem; }
+        .text-input { width: 100%; padding: 1rem 1.25rem; font-family: 'DM Sans', sans-serif; font-size: 1rem; border: 1px solid var(--border); border-radius: 8px; background: white; transition: border-color 0.2s ease; }
+        .text-input:focus { outline: none; border-color: var(--accent); }
+        .text-input::placeholder { color: #aaa; }
 
-        .option-item input {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-        }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+        .btn { padding: 0.875rem 2rem; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500; border-radius: 6px; cursor: pointer; transition: all 0.2s ease; }
+        .btn-back { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+        .btn-back:hover { border-color: var(--ink); color: var(--ink); }
+        .btn-next { background: var(--ink); border: 1px solid var(--ink); color: white; }
+        .btn-next:hover { background: #333; }
+        .btn-next:disabled { background: var(--border); border-color: var(--border); cursor: not-allowed; }
+        .btn-hidden { visibility: hidden; }
 
-        .option-label {
-            display: block;
-            padding: 1rem 1.25rem;
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 0.95rem;
-        }
+        .intro-section { text-align: center; padding: 2rem 0; }
+        .intro-section p { margin-bottom: 1.25rem; font-size: 1.05rem; }
+        .intro-section .lead { font-family: 'Instrument Serif', serif; font-size: 1.35rem; font-style: italic; color: var(--ink); }
 
-        .option-label:hover {
-            border-color: var(--accent);
-            background: #fff;
-        }
+        .quiz-meta { display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0; padding: 1rem; background: var(--accent-lighter); border-radius: 8px; font-size: 0.9rem; color: var(--muted); }
+        .quiz-meta span { display: flex; align-items: center; gap: 0.5rem; }
+        .btn-start { margin-top: 2rem; padding: 1rem 3rem; font-size: 1rem; }
 
-        .option-item input:checked + .option-label {
-            border-color: var(--accent);
-            background: var(--accent-light);
-        }
+        .results-section { display: none; animation: fadeIn 0.5s ease; }
+        .results-section.active { display: block; }
 
-        /* Multi-select indicator */
-        .option-label::before {
-            content: '';
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            border: 2px solid var(--border);
-            border-radius: 4px;
-            margin-right: 12px;
-            vertical-align: middle;
-            transition: all 0.2s ease;
-        }
+        .result-type { text-align: center; padding: 2.5rem; background: white; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 2rem; }
+        .result-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 0.75rem; }
+        .result-title { font-family: 'Instrument Serif', serif; font-size: 2.25rem; margin-bottom: 1rem; }
+        .result-subtitle { color: var(--muted); font-size: 1.1rem; max-width: 480px; margin: 0 auto; }
 
-        .option-item input:checked + .option-label::before {
-            background: var(--accent);
-            border-color: var(--accent);
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3E%3C/svg%3E");
-        }
+        .result-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin-bottom: 1.5rem; }
+        .result-card h3 { font-family: 'Instrument Serif', serif; font-size: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .result-card h3::before { content: ''; display: inline-block; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+        .result-card p { color: var(--muted); margin-bottom: 1rem; }
+        .result-card p:last-child { margin-bottom: 0; }
 
-        /* Single select radio style */
-        .single-select .option-label::before {
-            border-radius: 50%;
-        }
+        .explainer-box { background: var(--accent-lighter); border-radius: 8px; padding: 1.25rem; margin-top: 1rem; font-size: 0.9rem; }
+        .explainer-box strong { color: var(--accent-dark); }
+        .key-insight { background: var(--accent-light); border-left: 3px solid var(--accent); padding: 1rem 1.25rem; margin: 1rem 0; font-style: italic; }
 
-        .single-select .option-item input:checked + .option-label::before {
-            background-image: none;
-            box-shadow: inset 0 0 0 4px white;
-        }
+        .closing-message { text-align: center; padding: 2rem; background: var(--accent-light); border-radius: 12px; margin-top: 2rem; }
+        .closing-message p { font-family: 'Instrument Serif', serif; font-size: 1.35rem; font-style: italic; margin-bottom: 1.5rem; color: var(--ink); }
+        .closing-message .tagline { font-family: 'DM Sans', sans-serif; font-size: 1rem; font-style: normal; font-weight: 500; color: var(--accent-dark); }
 
-        /* Text input styling */
-        .text-input-wrapper {
-            margin-bottom: 1.5rem;
-        }
+        .score-bars { display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; }
+        .score-bar-item { display: flex; align-items: center; gap: 1rem; }
+        .score-bar-label { width: 120px; font-size: 0.85rem; font-weight: 500; }
+        .score-bar-track { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+        .score-bar-fill { height: 100%; background: var(--accent); border-radius: 4px; transition: width 0.6s ease; }
+        .score-bar-value { width: 40px; text-align: right; font-size: 0.85rem; color: var(--muted); }
 
-        .text-input {
-            width: 100%;
-            padding: 1rem 1.25rem;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 1rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: white;
-            transition: border-color 0.2s ease;
-        }
+        .what-now { background: white; border: 2px solid var(--accent); border-radius: 12px; padding: 2rem; margin: 2rem 0; }
+        .what-now h3 { font-family: 'Instrument Serif', serif; font-size: 1.35rem; margin-bottom: 1rem; color: var(--accent-dark); }
+        .what-now p { margin-bottom: 1rem; }
+        .action-step { background: var(--accent-lighter); padding: 1rem 1.25rem; border-radius: 8px; margin-top: 1rem; }
+        .action-step strong { display: block; color: var(--accent-dark); margin-bottom: 0.25rem; }
 
-        .text-input:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
+        .btn-retake { display: block; margin: 2rem auto 0; background: transparent; border: 1px solid var(--ink); color: var(--ink); }
+        .btn-retake:hover { background: var(--ink); color: white; }
 
-        .text-input::placeholder {
-            color: #aaa;
-        }
+        .email-capture { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin-top: 2rem; text-align: center; }
+        .email-capture h3 { font-family: 'Instrument Serif', serif; font-size: 1.35rem; margin-bottom: 0.5rem; }
+        .email-capture > p { color: var(--muted); margin-bottom: 1rem; font-size: 0.95rem; }
+        .privacy-note { font-size: 0.8rem; color: var(--muted); margin-top: 1rem; text-align: center; }
 
-        /* Navigation */
-        .nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 2.5rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .btn {
-            padding: 0.875rem 2rem;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 500;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn-back {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--muted);
-        }
-
-        .btn-back:hover {
-            border-color: var(--ink);
-            color: var(--ink);
-        }
-
-        .btn-next {
-            background: var(--ink);
-            border: 1px solid var(--ink);
-            color: white;
-        }
-
-        .btn-next:hover {
-            background: #333;
-        }
-
-        .btn-next:disabled {
-            background: var(--border);
-            border-color: var(--border);
-            cursor: not-allowed;
-        }
-
-        .btn-hidden {
-            visibility: hidden;
-        }
-
-        /* Intro Section */
-        .intro-section {
-            text-align: center;
-            padding: 2rem 0;
-        }
-
-        .intro-section p {
-            margin-bottom: 1.25rem;
-            font-size: 1.05rem;
-        }
-
-        .intro-section .lead {
-            font-family: 'Instrument Serif', serif;
-            font-size: 1.35rem;
-            font-style: italic;
-            color: var(--ink);
-        }
-
-        .quiz-meta {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 1.5rem 0;
-            padding: 1rem;
-            background: var(--accent-lighter);
-            border-radius: 8px;
-            font-size: 0.9rem;
-            color: var(--muted);
-        }
-
-        .quiz-meta span {
-            display: flex;
+        /* Save button - NEW */
+        .btn-save {
+            display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-        }
-
-        .btn-start {
-            margin-top: 2rem;
-            padding: 1rem 3rem;
-            font-size: 1rem;
-        }
-
-        /* Results */
-        .results-section {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .results-section.active {
-            display: block;
-        }
-
-        .result-type {
-            text-align: center;
-            padding: 2.5rem;
-            background: white;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            margin-bottom: 2rem;
-        }
-
-        .result-label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--accent);
-            margin-bottom: 0.75rem;
-        }
-
-        .result-title {
-            font-family: 'Instrument Serif', serif;
-            font-size: 2.25rem;
-            margin-bottom: 1rem;
-        }
-
-        .result-subtitle {
-            color: var(--muted);
-            font-size: 1.1rem;
-            max-width: 480px;
-            margin: 0 auto;
-        }
-
-        .result-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .result-card h3 {
-            font-family: 'Instrument Serif', serif;
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .result-card h3::before {
-            content: '';
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: var(--accent);
-            border-radius: 50%;
-        }
-
-        .result-card p {
-            color: var(--muted);
-            margin-bottom: 1rem;
-        }
-
-        .result-card p:last-child {
-            margin-bottom: 0;
-        }
-
-        .result-card ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .result-card li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-            color: var(--muted);
-        }
-
-        .result-card li::before {
-            content: '—';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-        }
-
-        .explainer-box {
-            background: var(--accent-lighter);
-            border-radius: 8px;
-            padding: 1.25rem;
             margin-top: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .explainer-box strong {
-            color: var(--accent-dark);
-        }
-
-        .key-insight {
-            background: var(--accent-light);
-            border-left: 3px solid var(--accent);
-            padding: 1rem 1.25rem;
-            margin: 1rem 0;
-            font-style: italic;
-        }
-
-        .closing-message {
-            text-align: center;
-            padding: 2rem;
-            background: var(--accent-light);
-            border-radius: 12px;
-            margin-top: 2rem;
-        }
-
-        .closing-message p {
-            font-family: 'Instrument Serif', serif;
-            font-size: 1.35rem;
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            color: var(--ink);
-        }
-
-        .closing-message .tagline {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 1rem;
-            font-style: normal;
-            font-weight: 500;
-            color: var(--accent-dark);
-        }
-
-        /* Scores visual */
-        .score-bars {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-
-        .score-bar-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .score-bar-label {
-            width: 120px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        .score-bar-track {
-            flex: 1;
-            height: 8px;
-            background: var(--border);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .score-bar-fill {
-            height: 100%;
             background: var(--accent);
-            border-radius: 4px;
-            transition: width 0.6s ease;
-        }
-
-        .score-bar-value {
-            width: 40px;
-            text-align: right;
-            font-size: 0.85rem;
-            color: var(--muted);
-        }
-
-        /* What Now section */
-        .what-now {
-            background: white;
-            border: 2px solid var(--accent);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-
-        .what-now h3 {
-            font-family: 'Instrument Serif', serif;
-            font-size: 1.35rem;
-            margin-bottom: 1rem;
-            color: var(--accent-dark);
-        }
-
-        .what-now p {
-            margin-bottom: 1rem;
-        }
-
-        .action-step {
-            background: var(--accent-lighter);
-            padding: 1rem 1.25rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-        }
-
-        .action-step strong {
-            display: block;
-            color: var(--accent-dark);
-            margin-bottom: 0.25rem;
-        }
-
-        /* Retake */
-        .btn-retake {
-            display: block;
-            margin: 2rem auto 0;
-            background: transparent;
-            border: 1px solid var(--ink);
-            color: var(--ink);
-        }
-
-        .btn-retake:hover {
-            background: var(--ink);
+            border: 1px solid var(--accent);
             color: white;
         }
-
-        /* Email capture for Formspree */
-        .email-capture {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-top: 2rem;
-            text-align: center;
-        }
-
-        .email-capture h3 {
-            font-family: 'Instrument Serif', serif;
-            font-size: 1.35rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .email-capture > p {
-            color: var(--muted);
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-        }
-
-        .email-form {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .email-form input[type="email"] {
-            padding: 0.875rem 1rem;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.95rem;
-            text-align: center;
-        }
-
-        .email-form input[type="email"]:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-
-        .email-form button {
-            padding: 0.875rem 1.5rem;
-            background: var(--accent);
-            border: none;
-            border-radius: 6px;
-            color: white;
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.2s ease;
-        }
-
-        .email-form button:hover {
+        .btn-save:hover {
             background: var(--accent-dark);
+            border-color: var(--accent-dark);
         }
-
-        /* GDPR consent */
-        .gdpr-consent {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            text-align: left;
-            margin: 1rem 0;
-            font-size: 0.85rem;
-            color: var(--muted);
-        }
-
-        .gdpr-consent input[type="checkbox"] {
-            margin-top: 0.25rem;
-            width: 16px;
-            height: 16px;
-            accent-color: var(--accent);
-        }
-
-        .gdpr-consent label {
-            line-height: 1.4;
-        }
-
-        .gdpr-consent a {
-            color: var(--accent);
-            text-decoration: underline;
-        }
-
-        .privacy-note {
-            font-size: 0.8rem;
-            color: var(--muted);
-            margin-top: 1rem;
+        .save-buttons {
             text-align: center;
-        }
-
-        /* Hidden form fields */
-        .hidden-field {
-            display: none;
+            margin-top: 1.5rem;
         }
 
         @media (max-width: 600px) {
+            .container { padding: 2rem 1rem; }
+            .quiz-meta { flex-direction: column; gap: 0.5rem; }
+            .nav-buttons { flex-direction: column-reverse; gap: 1rem; }
+            .btn { width: 100%; text-align: center; }
+            .btn-hidden { display: none; }
+            .score-bar-label { width: 90px; font-size: 0.8rem; }
+        }
+
+        /* Print/Save styles - NEW */
+        @media print {
+            .quiz-header, .nav-buttons, .btn-retake, .btn-save, .save-buttons, .email-capture, .progress-container {
+                display: none !important;
+            }
+            .results-section {
+                display: block !important;
+            }
             .container {
-                padding: 2rem 1rem;
+                max-width: 100%;
+                padding: 1rem;
             }
-
-            .quiz-meta {
-                flex-direction: column;
-                gap: 0.5rem;
+            .result-card, .what-now, .closing-message {
+                break-inside: avoid;
+                page-break-inside: avoid;
             }
-
-            .nav-buttons {
-                flex-direction: column-reverse;
-                gap: 1rem;
-            }
-
-            .btn {
-                width: 100%;
-                text-align: center;
-            }
-
-            .btn-hidden {
-                display: none;
-            }
-
-            .score-bar-label {
-                width: 90px;
-                font-size: 0.8rem;
+            body {
+                background: white;
             }
         }
     </style>
@@ -672,7 +211,6 @@
             <p>A diagnostic to help you understand whether you're pursuing a goal, embarking on a quest, or answering a deeper call.</p>
         </header>
 
-        <!-- Intro -->
         <div id="intro" class="intro-section question-section active">
             <p>You have something you want to achieve. Maybe you've set goals, made plans, tried different approaches. Some worked. Some didn't.</p>
             <p>But here's what most people miss: <strong>not all ambitious undertakings are the same.</strong></p>
@@ -680,17 +218,14 @@
             <p>Each requires a different approach, different tools, different preparation. Using goal-setting tools on a quest is like bringing a day-pack to an expedition.</p>
             <p class="lead">"Not all who wander are lost."</p>
             <p>Let's find out what kind of journey you're actually on.</p>
-            
             <div class="quiz-meta">
                 <span>📝 14 questions</span>
                 <span>⏱️ 10–15 minutes</span>
             </div>
-
             <p style="font-size: 0.9rem; color: var(--muted);"><em>Think of something ambitious you want to accomplish. Hold it in mind as you answer these questions.</em></p>
             <button class="btn btn-next btn-start" onclick="startQuiz()">Begin the Diagnostic</button>
         </div>
 
-        <!-- Progress -->
         <div class="progress-container" id="progress-container" style="display: none;">
             <div class="progress-bar">
                 <div class="progress-fill" id="progress-fill"></div>
@@ -698,7 +233,6 @@
             <div class="progress-text"><span id="current-q">0</span> of <span id="total-q">15</span></div>
         </div>
 
-        <!-- Question 0: What's your quest? -->
         <div id="q0" class="question-section" data-question="0">
             <div class="question-number">Before we begin</div>
             <div class="question-text">What's the ambitious thing you're thinking about?</div>
@@ -709,495 +243,212 @@
             <p style="font-size: 0.85rem; color: var(--muted);">This is just for you (and helps us understand what people are working on). You can skip this if you prefer.</p>
         </div>
 
-        <!-- Question 1 -->
         <div id="q1" class="question-section" data-question="1">
             <div class="question-number">Question 1</div>
             <div class="question-text">When you imagine the end point of this thing:</div>
             <div class="question-instruction">Select all that apply</div>
             <ul class="options-list">
-                <li class="option-item">
-                    <input type="checkbox" id="q1a" name="q1" value="goal" data-type="goal" data-label="Clear, specific, measurable end point">
-                    <label class="option-label" for="q1a">I can describe exactly what "done" looks like—specific and measurable</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q1b" name="q1" value="quest" data-type="quest" data-label="Strong direction, final form still forming">
-                    <label class="option-label" for="q1b">I have a strong sense of direction, but the final form is still taking shape</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q1c" name="q1" value="hero" data-type="hero" data-label="Destination feels like a feeling/state">
-                    <label class="option-label" for="q1c">The destination feels more like a feeling or state than a concrete outcome</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q1d" name="q1" value="hero" data-type="hero" data-label="Will know it when I get there">
-                    <label class="option-label" for="q1d">I'll know it when I get there, but I struggle to articulate it now</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q1e" name="q1" value="quest" data-type="quest" data-label="It keeps evolving">
-                    <label class="option-label" for="q1e">It keeps evolving the more I think about it</label>
-                </li>
+                <li class="option-item"><input type="checkbox" id="q1a" name="q1" value="goal" data-type="goal" data-label="Clear, specific, measurable end point"><label class="option-label" for="q1a">I can describe exactly what "done" looks like—specific and measurable</label></li>
+                <li class="option-item"><input type="checkbox" id="q1b" name="q1" value="quest" data-type="quest" data-label="Strong direction, final form still forming"><label class="option-label" for="q1b">I have a strong sense of direction, but the final form is still taking shape</label></li>
+                <li class="option-item"><input type="checkbox" id="q1c" name="q1" value="hero" data-type="hero" data-label="Destination feels like a feeling/state"><label class="option-label" for="q1c">The destination feels more like a feeling or state than a concrete outcome</label></li>
+                <li class="option-item"><input type="checkbox" id="q1d" name="q1" value="hero" data-type="hero" data-label="Will know it when I get there"><label class="option-label" for="q1d">I'll know it when I get there, but I struggle to articulate it now</label></li>
+                <li class="option-item"><input type="checkbox" id="q1e" name="q1" value="quest" data-type="quest" data-label="It keeps evolving"><label class="option-label" for="q1e">It keeps evolving the more I think about it</label></li>
             </ul>
         </div>
 
-        <!-- Question 2 -->
         <div id="q2" class="question-section" data-question="2">
             <div class="question-number">Question 2</div>
             <div class="question-text">If you tried to map out the path from here to there:</div>
             <div class="question-instruction">Select all that apply</div>
             <ul class="options-list">
-                <li class="option-item">
-                    <input type="checkbox" id="q2a" name="q2" value="goal" data-type="goal" data-label="Can create plan with milestones">
-                    <label class="option-label" for="q2a">I could create a reasonable plan with milestones and timelines</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q2b" name="q2" value="quest" data-type="quest" data-label="First steps clear, then foggy">
-                    <label class="option-label" for="q2b">I can see the first few steps clearly, then it gets foggy</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q2c" name="q2" value="hero" data-type="hero" data-label="Would be guessing the steps">
-                    <label class="option-label" for="q2c">I'd be guessing—the honest answer is I don't know the steps yet</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q2d" name="q2" value="quest" data-type="quest" data-label="Path shifts based on factors">
-                    <label class="option-label" for="q2d">The path seems to shift depending on factors I can't control</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q2e" name="q2" value="hero" data-type="hero" data-label="Figuring out work is part of work">
-                    <label class="option-label" for="q2e">Part of the work is figuring out what the work even is</label>
-                </li>
+                <li class="option-item"><input type="checkbox" id="q2a" name="q2" value="goal" data-type="goal" data-label="Can create plan with milestones"><label class="option-label" for="q2a">I could create a reasonable plan with milestones and timelines</label></li>
+                <li class="option-item"><input type="checkbox" id="q2b" name="q2" value="quest" data-type="quest" data-label="First steps clear, then foggy"><label class="option-label" for="q2b">I can see the first few steps clearly, then it gets foggy</label></li>
+                <li class="option-item"><input type="checkbox" id="q2c" name="q2" value="hero" data-type="hero" data-label="Would be guessing the steps"><label class="option-label" for="q2c">I'd be guessing—the honest answer is I don't know the steps yet</label></li>
+                <li class="option-item"><input type="checkbox" id="q2d" name="q2" value="quest" data-type="quest" data-label="Path shifts based on factors"><label class="option-label" for="q2d">The path seems to shift depending on factors I can't control</label></li>
+                <li class="option-item"><input type="checkbox" id="q2e" name="q2" value="hero" data-type="hero" data-label="Figuring out work is part of work"><label class="option-label" for="q2e">Part of the work is figuring out what the work even is</label></li>
             </ul>
         </div>
 
-        <!-- Question 3 -->
         <div id="q3" class="question-section" data-question="3">
             <div class="question-number">Question 3</div>
             <div class="question-text">What do you already know about the obstacles ahead?</div>
             <div class="question-instruction">Select all that apply</div>
             <ul class="options-list">
-                <li class="option-item">
-                    <input type="checkbox" id="q3a" name="q3" value="goal" data-type="goal" data-label="Can name main challenges">
-                    <label class="option-label" for="q3a">I can name the main challenges—they're fairly predictable</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q3b" name="q3" value="quest" data-type="quest" data-label="Some known, others hidden">
-                    <label class="option-label" for="q3b">I know some obstacles, but I suspect there are others I can't see yet</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q3c" name="q3" value="quest" data-type="quest" data-label="Hit unexpected walls before">
-                    <label class="option-label" for="q3c">I've hit walls before that I didn't anticipate at all</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q3d" name="q3" value="hero" data-type="hero" data-label="External manageable, internal uncertain">
-                    <label class="option-label" for="q3d">The external obstacles seem manageable; it's the internal ones I'm less sure about</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q3e" name="q3" value="hero" data-type="hero" data-label="Feels like an iceberg">
-                    <label class="option-label" for="q3e">It feels like an iceberg—what's visible is probably a fraction of what's there</label>
-                </li>
+                <li class="option-item"><input type="checkbox" id="q3a" name="q3" value="goal" data-type="goal" data-label="Can name main challenges"><label class="option-label" for="q3a">I can name the main challenges—they're fairly predictable</label></li>
+                <li class="option-item"><input type="checkbox" id="q3b" name="q3" value="quest" data-type="quest" data-label="Some known, others hidden"><label class="option-label" for="q3b">I know some obstacles, but I suspect there are others I can't see yet</label></li>
+                <li class="option-item"><input type="checkbox" id="q3c" name="q3" value="quest" data-type="quest" data-label="Hit unexpected walls before"><label class="option-label" for="q3c">I've hit walls before that I didn't anticipate at all</label></li>
+                <li class="option-item"><input type="checkbox" id="q3d" name="q3" value="hero" data-type="hero" data-label="External manageable, internal uncertain"><label class="option-label" for="q3d">The external obstacles seem manageable; it's the internal ones I'm less sure about</label></li>
+                <li class="option-item"><input type="checkbox" id="q3e" name="q3" value="hero" data-type="hero" data-label="Feels like an iceberg"><label class="option-label" for="q3e">It feels like an iceberg—what's visible is probably a fraction of what's there</label></li>
             </ul>
         </div>
 
-        <!-- Question 4 -->
         <div id="q4" class="question-section single-select" data-question="4">
             <div class="question-number">Question 4</div>
             <div class="question-text">When you think about who you need to be to accomplish this:</div>
             <div class="question-instruction">Select one</div>
             <ul class="options-list">
-                <li class="option-item">
-                    <input type="radio" id="q4a" name="q4" value="goal" data-type="goal" data-label="Already the right person">
-                    <label class="option-label" for="q4a">I'm basically the right person—I just need to do the work</label>
-                </li>
-                <li class="option-item">
-                    <input type="radio" id="q4b" name="q4" value="quest" data-type="quest" data-label="Need to grow and stretch">
-                    <label class="option-label" for="q4b">I'll need to grow, stretch, and build some new capabilities</label>
-                </li>
-                <li class="option-item">
-                    <input type="radio" id="q4c" name="q4" value="hero" data-type="hero" data-label="Can't get there as current self">
-                    <label class="option-label" for="q4c">Some part of me senses I can't get there as who I currently am</label>
-                </li>
-                <li class="option-item">
-                    <input type="radio" id="q4d" name="q4" value="hero" data-type="hero" data-label="Will need to let go of parts">
-                    <label class="option-label" for="q4d">I think this will require me to let go of parts of who I've been</label>
-                </li>
+                <li class="option-item"><input type="radio" id="q4a" name="q4" value="goal" data-type="goal" data-label="Already the right person"><label class="option-label" for="q4a">I'm basically the right person—I just need to do the work</label></li>
+                <li class="option-item"><input type="radio" id="q4b" name="q4" value="quest" data-type="quest" data-label="Need to grow and stretch"><label class="option-label" for="q4b">I'll need to grow, stretch, and build some new capabilities</label></li>
+                <li class="option-item"><input type="radio" id="q4c" name="q4" value="hero" data-type="hero" data-label="Can't get there as current self"><label class="option-label" for="q4c">Some part of me senses I can't get there as who I currently am</label></li>
+                <li class="option-item"><input type="radio" id="q4d" name="q4" value="hero" data-type="hero" data-label="Will need to let go of parts"><label class="option-label" for="q4d">I think this will require me to let go of parts of who I've been</label></li>
             </ul>
         </div>
 
-        <!-- Question 5 -->
         <div id="q5" class="question-section" data-question="5">
             <div class="question-number">Question 5</div>
             <div class="question-text">What feels like the hardest part of this?</div>
             <div class="question-instruction">Select up to three</div>
             <ul class="options-list">
-                <li class="option-item">
-                    <input type="checkbox" id="q5a" name="q5" value="exec" data-type="execution" data-label="Staying consistent">
-                    <label class="option-label" for="q5a">Staying consistent—showing up and doing the work day after day</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q5b" name="q5" value="exec" data-type="execution" data-label="Managing time/energy">
-                    <label class="option-label" for="q5b">Managing my time and energy across competing demands</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q5c" name="q5" value="nav" data-type="navigation" data-label="Decision-making">
-                    <label class="option-label" for="q5c">Figuring out what to actually do—the decision-making</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q5d" name="q5" value="nav" data-type="navigation" data-label="Uncertainty and ambiguity">
-                    <label class="option-label" for="q5d">Dealing with uncertainty and ambiguity</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q5e" name="q5" value="trans" data-type="transformation" data-label="Staying motivated when slow">
-                    <label class="option-label" for="q5e">Staying motivated when progress is slow or invisible</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q5f" name="q5" value="trans" data-type="transformation" data-label="Handling loneliness">
-                    <label class="option-label" for="q5f">Handling the loneliness of it</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q5g" name="q5" value="trans" data-type="transformation" data-label="Trusting self through unknown">
-                    <label class="option-label" for="q5g">Trusting myself through the parts I can't plan for</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q5h" name="q5" value="nav" data-type="navigation" data-label="Not knowing if on right track">
-                    <label class="option-label" for="q5h">Not knowing if I'm on the right track</label>
-                </li>
+                <li class="option-item"><input type="checkbox" id="q5a" name="q5" value="exec" data-type="execution" data-label="Staying consistent"><label class="option-label" for="q5a">Staying consistent—showing up and doing the work day after day</label></li>
+                <li class="option-item"><input type="checkbox" id="q5b" name="q5" value="exec" data-type="execution" data-label="Managing time/energy"><label class="option-label" for="q5b">Managing my time and energy across competing demands</label></li>
+                <li class="option-item"><input type="checkbox" id="q5c" name="q5" value="nav" data-type="navigation" data-label="Decision-making"><label class="option-label" for="q5c">Figuring out what to actually do—the decision-making</label></li>
+                <li class="option-item"><input type="checkbox" id="q5d" name="q5" value="nav" data-type="navigation" data-label="Uncertainty and ambiguity"><label class="option-label" for="q5d">Dealing with uncertainty and ambiguity</label></li>
+                <li class="option-item"><input type="checkbox" id="q5e" name="q5" value="trans" data-type="transformation" data-label="Staying motivated when slow"><label class="option-label" for="q5e">Staying motivated when progress is slow or invisible</label></li>
+                <li class="option-item"><input type="checkbox" id="q5f" name="q5" value="trans" data-type="transformation" data-label="Handling loneliness"><label class="option-label" for="q5f">Handling the loneliness of it</label></li>
+                <li class="option-item"><input type="checkbox" id="q5g" name="q5" value="trans" data-type="transformation" data-label="Trusting self through unknown"><label class="option-label" for="q5g">Trusting myself through the parts I can't plan for</label></li>
+                <li class="option-item"><input type="checkbox" id="q5h" name="q5" value="nav" data-type="navigation" data-label="Not knowing if on right track"><label class="option-label" for="q5h">Not knowing if I'm on the right track</label></li>
             </ul>
         </div>
 
-        <!-- Question 6 -->
         <div id="q6" class="question-section" data-question="6">
             <div class="question-number">Question 6</div>
             <div class="question-text">When you've tried to make progress on this (or something like it) before, what happened?</div>
             <div class="question-instruction">Select all that apply</div>
             <ul class="options-list">
-                <li class="option-item">
-                    <input type="checkbox" id="q6a" name="q6" value="goal" data-type="goal" data-label="Steady progress when disciplined">
-                    <label class="option-label" for="q6a">I made steady progress when I stayed disciplined</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q6b" name="q6" value="exec" data-type="execution" data-label="Started strong, lost momentum">
-                    <label class="option-label" for="q6b">I started strong but lost momentum</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q6c" name="q6" value="quest" data-type="quest" data-label="Unexpected walls forced pivots">
-                    <label class="option-label" for="q6c">I kept hitting unexpected walls that forced me to pivot</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q6d" name="q6" value="nav" data-type="navigation" data-label="Overwhelmed by decisions">
-                    <label class="option-label" for="q6d">I felt overwhelmed by how many decisions there were to make</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q6e" name="q6" value="trans" data-type="transformation" data-label="Stuck in head—doubt, perfectionism">
-                    <label class="option-label" for="q6e">I got stuck in my head—doubt, perfectionism, second-guessing</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q6f" name="q6" value="goal" data-type="goal" data-label="External circumstances">
-                    <label class="option-label" for="q6f">External circumstances got in the way</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q6g" name="q6" value="quest" data-type="quest" data-label="Not sure why stalled">
-                    <label class="option-label" for="q6g">I'm not sure why it stalled, honestly</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q6h" name="q6" value="hero" data-type="hero" data-label="Haven't tried—new territory">
-                    <label class="option-label" for="q6h">I haven't really tried before—this is new territory</label>
-                </li>
+                <li class="option-item"><input type="checkbox" id="q6a" name="q6" value="goal" data-type="goal" data-label="Steady progress when disciplined"><label class="option-label" for="q6a">I made steady progress when I stayed disciplined</label></li>
+                <li class="option-item"><input type="checkbox" id="q6b" name="q6" value="exec" data-type="execution" data-label="Started strong, lost momentum"><label class="option-label" for="q6b">I started strong but lost momentum</label></li>
+                <li class="option-item"><input type="checkbox" id="q6c" name="q6" value="quest" data-type="quest" data-label="Unexpected walls forced pivots"><label class="option-label" for="q6c">I kept hitting unexpected walls that forced me to pivot</label></li>
+                <li class="option-item"><input type="checkbox" id="q6d" name="q6" value="nav" data-type="navigation" data-label="Overwhelmed by decisions"><label class="option-label" for="q6d">I felt overwhelmed by how many decisions there were to make</label></li>
+                <li class="option-item"><input type="checkbox" id="q6e" name="q6" value="trans" data-type="transformation" data-label="Stuck in head—doubt, perfectionism"><label class="option-label" for="q6e">I got stuck in my head—doubt, perfectionism, second-guessing</label></li>
+                <li class="option-item"><input type="checkbox" id="q6f" name="q6" value="goal" data-type="goal" data-label="External circumstances"><label class="option-label" for="q6f">External circumstances got in the way</label></li>
+                <li class="option-item"><input type="checkbox" id="q6g" name="q6" value="quest" data-type="quest" data-label="Not sure why stalled"><label class="option-label" for="q6g">I'm not sure why it stalled, honestly</label></li>
+                <li class="option-item"><input type="checkbox" id="q6h" name="q6" value="hero" data-type="hero" data-label="Haven't tried—new territory"><label class="option-label" for="q6h">I haven't really tried before—this is new territory</label></li>
             </ul>
         </div>
 
-        <!-- Question 7 -->
         <div id="q7" class="question-section" data-question="7">
             <div class="question-number">Question 7</div>
             <div class="question-text">What are you risking by going after this?</div>
             <div class="question-instruction">Select all that apply</div>
             <ul class="options-list">
-                <li class="option-item">
-                    <input type="checkbox" id="q7a" name="q7" value="goal" data-type="goal" data-label="Time and energy">
-                    <label class="option-label" for="q7a">Time and energy</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q7b" name="q7" value="goal" data-type="goal" data-label="Money/financial stability">
-                    <label class="option-label" for="q7b">Money or financial stability</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q7c" name="q7" value="quest" data-type="quest" data-label="Comfort and predictability">
-                    <label class="option-label" for="q7c">Comfort and predictability</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q7d" name="q7" value="quest" data-type="quest" data-label="How others see me">
-                    <label class="option-label" for="q7d">How others see me</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q7e" name="q7" value="hero" data-type="hero" data-label="Sense of who I've been">
-                    <label class="option-label" for="q7e">A sense of who I've been</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q7f" name="q7" value="hero" data-type="hero" data-label="Relationships">
-                    <label class="option-label" for="q7f">A relationship or relationships</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q7g" name="q7" value="quest" data-type="quest" data-label="Fallback options">
-                    <label class="option-label" for="q7g">My fallback options</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q7h" name="q7" value="hero" data-type="hero" data-label="Something I can't name">
-                    <label class="option-label" for="q7h">Something I can't fully name yet</label>
-                </li>
+                <li class="option-item"><input type="checkbox" id="q7a" name="q7" value="goal" data-type="goal" data-label="Time and energy"><label class="option-label" for="q7a">Time and energy</label></li>
+                <li class="option-item"><input type="checkbox" id="q7b" name="q7" value="goal" data-type="goal" data-label="Money/financial stability"><label class="option-label" for="q7b">Money or financial stability</label></li>
+                <li class="option-item"><input type="checkbox" id="q7c" name="q7" value="quest" data-type="quest" data-label="Comfort and predictability"><label class="option-label" for="q7c">Comfort and predictability</label></li>
+                <li class="option-item"><input type="checkbox" id="q7d" name="q7" value="quest" data-type="quest" data-label="How others see me"><label class="option-label" for="q7d">How others see me</label></li>
+                <li class="option-item"><input type="checkbox" id="q7e" name="q7" value="hero" data-type="hero" data-label="Sense of who I've been"><label class="option-label" for="q7e">A sense of who I've been</label></li>
+                <li class="option-item"><input type="checkbox" id="q7f" name="q7" value="hero" data-type="hero" data-label="Relationships"><label class="option-label" for="q7f">A relationship or relationships</label></li>
+                <li class="option-item"><input type="checkbox" id="q7g" name="q7" value="quest" data-type="quest" data-label="Fallback options"><label class="option-label" for="q7g">My fallback options</label></li>
+                <li class="option-item"><input type="checkbox" id="q7h" name="q7" value="hero" data-type="hero" data-label="Something I can't name"><label class="option-label" for="q7h">Something I can't fully name yet</label></li>
             </ul>
         </div>
 
-        <!-- Question 8 -->
         <div id="q8" class="question-section single-select" data-question="8">
             <div class="question-number">Question 8</div>
             <div class="question-text">When you imagine the timeline for this:</div>
             <div class="question-instruction">Select one</div>
             <ul class="options-list">
-                <li class="option-item">
-                    <input type="radio" id="q8a" name="q8" value="goal" data-type="goal" data-label="Weeks to months, clear end">
-                    <label class="option-label" for="q8a">Weeks to a few months—it has a clear end point</label>
-                </li>
-                <li class="option-item">
-                    <input type="radio" id="q8b" name="q8" value="goal" data-type="goal" data-label="6-12 months with phases">
-                    <label class="option-label" for="q8b">Six months to a year, with distinct phases</label>
-                </li>
-                <li class="option-item">
-                    <input type="radio" id="q8c" name="q8" value="quest" data-type="quest" data-label="Year or more, longer arc">
-                    <label class="option-label" for="q8c">A year or more—it's a longer arc</label>
-                </li>
-                <li class="option-item">
-                    <input type="radio" id="q8d" name="q8" value="hero" data-type="hero" data-label="However long it takes">
-                    <label class="option-label" for="q8d">"However long it takes"—this isn't something I can put a deadline on</label>
-                </li>
-                <li class="option-item">
-                    <input type="radio" id="q8e" name="q8" value="quest" data-type="quest" data-label="Don't know—too many unknowns">
-                    <label class="option-label" for="q8e">I genuinely don't know—it depends on too many unknowns</label>
-                </li>
+                <li class="option-item"><input type="radio" id="q8a" name="q8" value="goal" data-type="goal" data-label="Weeks to months, clear end"><label class="option-label" for="q8a">Weeks to a few months—it has a clear end point</label></li>
+                <li class="option-item"><input type="radio" id="q8b" name="q8" value="goal" data-type="goal" data-label="6-12 months with phases"><label class="option-label" for="q8b">Six months to a year, with distinct phases</label></li>
+                <li class="option-item"><input type="radio" id="q8c" name="q8" value="quest" data-type="quest" data-label="Year or more, longer arc"><label class="option-label" for="q8c">A year or more—it's a longer arc</label></li>
+                <li class="option-item"><input type="radio" id="q8d" name="q8" value="hero" data-type="hero" data-label="However long it takes"><label class="option-label" for="q8d">"However long it takes"—this isn't something I can put a deadline on</label></li>
+                <li class="option-item"><input type="radio" id="q8e" name="q8" value="quest" data-type="quest" data-label="Don't know—too many unknowns"><label class="option-label" for="q8e">I genuinely don't know—it depends on too many unknowns</label></li>
             </ul>
         </div>
 
-        <!-- Question 9 -->
         <div id="q9" class="question-section" data-question="9">
             <div class="question-number">Question 9</div>
             <div class="question-text">Why this? Why now?</div>
             <div class="question-instruction">Select all that apply</div>
             <ul class="options-list">
-                <li class="option-item">
-                    <input type="checkbox" id="q9a" name="q9" value="goal" data-type="goal" data-label="Logical next step">
-                    <label class="option-label" for="q9a">It's a logical next step in my life or career</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q9b" name="q9" value="quest" data-type="quest" data-label="Thinking about it, timing right">
-                    <label class="option-label" for="q9b">I've been thinking about this for a while and the timing feels right</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q9c" name="q9" value="goal" data-type="goal" data-label="Opportunity appeared">
-                    <label class="option-label" for="q9c">An opportunity appeared and I want to take it</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q9d" name="q9" value="hero" data-type="hero" data-label="Something shifted—crisis/realization">
-                    <label class="option-label" for="q9d">Something shifted—a crisis, a realization, a door closing</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q9e" name="q9" value="hero" data-type="hero" data-label="Won't leave me alone—calling">
-                    <label class="option-label" for="q9e">It won't leave me alone—it feels like something I have to do</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q9f" name="q9" value="quest" data-type="quest" data-label="Not sure, something pulling me">
-                    <label class="option-label" for="q9f">I'm not entirely sure, but something is pulling me toward it</label>
-                </li>
+                <li class="option-item"><input type="checkbox" id="q9a" name="q9" value="goal" data-type="goal" data-label="Logical next step"><label class="option-label" for="q9a">It's a logical next step in my life or career</label></li>
+                <li class="option-item"><input type="checkbox" id="q9b" name="q9" value="quest" data-type="quest" data-label="Thinking about it, timing right"><label class="option-label" for="q9b">I've been thinking about this for a while and the timing feels right</label></li>
+                <li class="option-item"><input type="checkbox" id="q9c" name="q9" value="goal" data-type="goal" data-label="Opportunity appeared"><label class="option-label" for="q9c">An opportunity appeared and I want to take it</label></li>
+                <li class="option-item"><input type="checkbox" id="q9d" name="q9" value="hero" data-type="hero" data-label="Something shifted—crisis/realization"><label class="option-label" for="q9d">Something shifted—a crisis, a realization, a door closing</label></li>
+                <li class="option-item"><input type="checkbox" id="q9e" name="q9" value="hero" data-type="hero" data-label="Won't leave me alone—calling"><label class="option-label" for="q9e">It won't leave me alone—it feels like something I have to do</label></li>
+                <li class="option-item"><input type="checkbox" id="q9f" name="q9" value="quest" data-type="quest" data-label="Not sure, something pulling me"><label class="option-label" for="q9f">I'm not entirely sure, but something is pulling me toward it</label></li>
             </ul>
         </div>
 
-        <!-- Question 10 -->
         <div id="q10" class="question-section" data-question="10">
             <div class="question-number">Question 10</div>
             <div class="question-text">What kind of support do you think you'll need?</div>
             <div class="question-instruction">Select all that apply</div>
             <ul class="options-list">
-                <li class="option-item">
-                    <input type="checkbox" id="q10a" name="q10" value="exec" data-type="execution" data-label="Accountability">
-                    <label class="option-label" for="q10a">Accountability—someone to keep me on track</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q10b" name="q10" value="exec" data-type="execution" data-label="Clear system/structure">
-                    <label class="option-label" for="q10b">A clear system or structure to follow</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q10c" name="q10" value="nav" data-type="navigation" data-label="Guidance from someone experienced">
-                    <label class="option-label" for="q10c">Guidance from someone who's done something like this</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q10d" name="q10" value="goal" data-type="goal" data-label="Help with skills/knowledge">
-                    <label class="option-label" for="q10d">Help with specific skills or knowledge gaps</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q10e" name="q10" value="nav" data-type="navigation" data-label="Someone to think through decisions">
-                    <label class="option-label" for="q10e">Someone to think through decisions with</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q10f" name="q10" value="trans" data-type="transformation" data-label="Space to process emotional side">
-                    <label class="option-label" for="q10f">A space to process the emotional side of this</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q10g" name="q10" value="trans" data-type="transformation" data-label="People who won't let me hide">
-                    <label class="option-label" for="q10g">People who won't let me hide from myself</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q10h" name="q10" value="quest" data-type="quest" data-label="Not sure yet">
-                    <label class="option-label" for="q10h">I'm not sure yet—I might not know until I'm in it</label>
-                </li>
+                <li class="option-item"><input type="checkbox" id="q10a" name="q10" value="exec" data-type="execution" data-label="Accountability"><label class="option-label" for="q10a">Accountability—someone to keep me on track</label></li>
+                <li class="option-item"><input type="checkbox" id="q10b" name="q10" value="exec" data-type="execution" data-label="Clear system/structure"><label class="option-label" for="q10b">A clear system or structure to follow</label></li>
+                <li class="option-item"><input type="checkbox" id="q10c" name="q10" value="nav" data-type="navigation" data-label="Guidance from someone experienced"><label class="option-label" for="q10c">Guidance from someone who's done something like this</label></li>
+                <li class="option-item"><input type="checkbox" id="q10d" name="q10" value="goal" data-type="goal" data-label="Help with skills/knowledge"><label class="option-label" for="q10d">Help with specific skills or knowledge gaps</label></li>
+                <li class="option-item"><input type="checkbox" id="q10e" name="q10" value="nav" data-type="navigation" data-label="Someone to think through decisions"><label class="option-label" for="q10e">Someone to think through decisions with</label></li>
+                <li class="option-item"><input type="checkbox" id="q10f" name="q10" value="trans" data-type="transformation" data-label="Space to process emotional side"><label class="option-label" for="q10f">A space to process the emotional side of this</label></li>
+                <li class="option-item"><input type="checkbox" id="q10g" name="q10" value="trans" data-type="transformation" data-label="People who won't let me hide"><label class="option-label" for="q10g">People who won't let me hide from myself</label></li>
+                <li class="option-item"><input type="checkbox" id="q10h" name="q10" value="quest" data-type="quest" data-label="Not sure yet"><label class="option-label" for="q10h">I'm not sure yet—I might not know until I'm in it</label></li>
             </ul>
         </div>
 
-        <!-- Question 11 -->
         <div id="q11" class="question-section" data-question="11">
             <div class="question-number">Question 11</div>
             <div class="question-text">When you imagine yourself struggling with this, what does that look like?</div>
             <div class="question-instruction">Select up to three</div>
             <ul class="options-list">
-                <li class="option-item">
-                    <input type="checkbox" id="q11a" name="q11" value="exec" data-type="execution" data-label="Procrastinating, avoiding">
-                    <label class="option-label" for="q11a">Procrastinating, avoiding, not doing the thing I said I'd do</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q11b" name="q11" value="exec" data-type="execution" data-label="Distracted, scattered">
-                    <label class="option-label" for="q11b">Getting distracted, scattered, losing focus</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q11c" name="q11" value="nav" data-type="navigation" data-label="Working on wrong things">
-                    <label class="option-label" for="q11c">Working hard but on the wrong things</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q11d" name="q11" value="nav" data-type="navigation" data-label="Overthinking, not acting">
-                    <label class="option-label" for="q11d">Overthinking, researching endlessly, not acting</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q11e" name="q11" value="nav" data-type="navigation" data-label="Paralyzed by options">
-                    <label class="option-label" for="q11e">Feeling paralyzed by too many options</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q11f" name="q11" value="trans" data-type="transformation" data-label="Doubting capability">
-                    <label class="option-label" for="q11f">Doubting whether I'm capable of this</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q11g" name="q11" value="trans" data-type="transformation" data-label="Doubting right thing">
-                    <label class="option-label" for="q11g">Doubting whether this is even the right thing to pursue</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q11h" name="q11" value="trans" data-type="transformation" data-label="Losing hope">
-                    <label class="option-label" for="q11h">Losing hope when results don't come</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q11i" name="q11" value="trans" data-type="transformation" data-label="Stories about why won't work">
-                    <label class="option-label" for="q11i">Telling myself stories about why it won't work</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q11j" name="q11" value="trans" data-type="transformation" data-label="Hiding from feedback">
-                    <label class="option-label" for="q11j">Hiding from feedback or outside perspectives</label>
-                </li>
+                <li class="option-item"><input type="checkbox" id="q11a" name="q11" value="exec" data-type="execution" data-label="Procrastinating, avoiding"><label class="option-label" for="q11a">Procrastinating, avoiding, not doing the thing I said I'd do</label></li>
+                <li class="option-item"><input type="checkbox" id="q11b" name="q11" value="exec" data-type="execution" data-label="Distracted, scattered"><label class="option-label" for="q11b">Getting distracted, scattered, losing focus</label></li>
+                <li class="option-item"><input type="checkbox" id="q11c" name="q11" value="nav" data-type="navigation" data-label="Working on wrong things"><label class="option-label" for="q11c">Working hard but on the wrong things</label></li>
+                <li class="option-item"><input type="checkbox" id="q11d" name="q11" value="nav" data-type="navigation" data-label="Overthinking, not acting"><label class="option-label" for="q11d">Overthinking, researching endlessly, not acting</label></li>
+                <li class="option-item"><input type="checkbox" id="q11e" name="q11" value="nav" data-type="navigation" data-label="Paralyzed by options"><label class="option-label" for="q11e">Feeling paralyzed by too many options</label></li>
+                <li class="option-item"><input type="checkbox" id="q11f" name="q11" value="trans" data-type="transformation" data-label="Doubting capability"><label class="option-label" for="q11f">Doubting whether I'm capable of this</label></li>
+                <li class="option-item"><input type="checkbox" id="q11g" name="q11" value="trans" data-type="transformation" data-label="Doubting right thing"><label class="option-label" for="q11g">Doubting whether this is even the right thing to pursue</label></li>
+                <li class="option-item"><input type="checkbox" id="q11h" name="q11" value="trans" data-type="transformation" data-label="Losing hope"><label class="option-label" for="q11h">Losing hope when results don't come</label></li>
+                <li class="option-item"><input type="checkbox" id="q11i" name="q11" value="trans" data-type="transformation" data-label="Stories about why won't work"><label class="option-label" for="q11i">Telling myself stories about why it won't work</label></li>
+                <li class="option-item"><input type="checkbox" id="q11j" name="q11" value="trans" data-type="transformation" data-label="Hiding from feedback"><label class="option-label" for="q11j">Hiding from feedback or outside perspectives</label></li>
             </ul>
         </div>
 
-        <!-- Question 12 -->
         <div id="q12" class="question-section single-select" data-question="12">
             <div class="question-number">Question 12</div>
             <div class="question-text">Which of these feels more true?</div>
             <div class="question-instruction">Select one</div>
             <ul class="options-list">
-                <li class="option-item">
-                    <input type="radio" id="q12a" name="q12" value="exec" data-type="execution" data-label="Know what to do, struggle to do it">
-                    <label class="option-label" for="q12a">I mostly know what to do—I struggle to make myself do it</label>
-                </li>
-                <li class="option-item">
-                    <input type="radio" id="q12b" name="q12" value="nav" data-type="navigation" data-label="Could do work, unsure it's right">
-                    <label class="option-label" for="q12b">I could probably force myself to do the work—I'm less sure I'm working on the right things</label>
-                </li>
-                <li class="option-item">
-                    <input type="radio" id="q12c" name="q12" value="both" data-type="both" data-label="Both, depending on day">
-                    <label class="option-label" for="q12c">Both feel true, depending on the day</label>
-                </li>
-                <li class="option-item">
-                    <input type="radio" id="q12d" name="q12" value="neither" data-type="neither" data-label="Neither—something else">
-                    <label class="option-label" for="q12d">Neither—my struggle is something else</label>
-                </li>
+                <li class="option-item"><input type="radio" id="q12a" name="q12" value="exec" data-type="execution" data-label="Know what to do, struggle to do it"><label class="option-label" for="q12a">I mostly know what to do—I struggle to make myself do it</label></li>
+                <li class="option-item"><input type="radio" id="q12b" name="q12" value="nav" data-type="navigation" data-label="Could do work, unsure it's right"><label class="option-label" for="q12b">I could probably force myself to do the work—I'm less sure I'm working on the right things</label></li>
+                <li class="option-item"><input type="radio" id="q12c" name="q12" value="both" data-type="both" data-label="Both, depending on day"><label class="option-label" for="q12c">Both feel true, depending on the day</label></li>
+                <li class="option-item"><input type="radio" id="q12d" name="q12" value="neither" data-type="neither" data-label="Neither—something else"><label class="option-label" for="q12d">Neither—my struggle is something else</label></li>
             </ul>
         </div>
 
-        <!-- Question 13 -->
         <div id="q13" class="question-section" data-question="13">
             <div class="question-number">Question 13</div>
             <div class="question-text">When things get hard, what tends to happen inside you?</div>
             <div class="question-instruction">Select all that apply</div>
             <ul class="options-list">
-                <li class="option-item">
-                    <input type="checkbox" id="q13a" name="q13" value="trans" data-type="transformation" data-label="Critical of self">
-                    <label class="option-label" for="q13a">I get critical of myself—"I should be further along"</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q13b" name="q13" value="trans" data-type="transformation" data-label="Question whole endeavor">
-                    <label class="option-label" for="q13b">I start questioning the whole endeavor</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q13c" name="q13" value="trans" data-type="transformation" data-label="Compare to others">
-                    <label class="option-label" for="q13c">I compare myself to others and come up short</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q13d" name="q13" value="trans" data-type="transformation" data-label="Feel alone, misunderstood">
-                    <label class="option-label" for="q13d">I feel alone, like no one understands what I'm trying to do</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q13e" name="q13" value="trans" data-type="transformation" data-label="Lose access to why">
-                    <label class="option-label" for="q13e">I lose access to why this mattered in the first place</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q13f" name="q13" value="trans" data-type="transformation" data-label="Lower expectations">
-                    <label class="option-label" for="q13f">I lower my expectations to protect myself from disappointment</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q13g" name="q13" value="exec" data-type="execution" data-label="Productive avoidance">
-                    <label class="option-label" for="q13g">I get busy with other things—productive avoidance</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q13h" name="q13" value="trans" data-type="transformation" data-label="Shut down, go quiet">
-                    <label class="option-label" for="q13h">I shut down and go quiet</label>
-                </li>
-                <li class="option-item">
-                    <input type="checkbox" id="q13i" name="q13" value="exec" data-type="execution" data-label="Push harder even when not working">
-                    <label class="option-label" for="q13i">I push harder, even when it's not working</label>
-                </li>
+                <li class="option-item"><input type="checkbox" id="q13a" name="q13" value="trans" data-type="transformation" data-label="Critical of self"><label class="option-label" for="q13a">I get critical of myself—"I should be further along"</label></li>
+                <li class="option-item"><input type="checkbox" id="q13b" name="q13" value="trans" data-type="transformation" data-label="Question whole endeavor"><label class="option-label" for="q13b">I start questioning the whole endeavor</label></li>
+                <li class="option-item"><input type="checkbox" id="q13c" name="q13" value="trans" data-type="transformation" data-label="Compare to others"><label class="option-label" for="q13c">I compare myself to others and come up short</label></li>
+                <li class="option-item"><input type="checkbox" id="q13d" name="q13" value="trans" data-type="transformation" data-label="Feel alone, misunderstood"><label class="option-label" for="q13d">I feel alone, like no one understands what I'm trying to do</label></li>
+                <li class="option-item"><input type="checkbox" id="q13e" name="q13" value="trans" data-type="transformation" data-label="Lose access to why"><label class="option-label" for="q13e">I lose access to why this mattered in the first place</label></li>
+                <li class="option-item"><input type="checkbox" id="q13f" name="q13" value="trans" data-type="transformation" data-label="Lower expectations"><label class="option-label" for="q13f">I lower my expectations to protect myself from disappointment</label></li>
+                <li class="option-item"><input type="checkbox" id="q13g" name="q13" value="exec" data-type="execution" data-label="Productive avoidance"><label class="option-label" for="q13g">I get busy with other things—productive avoidance</label></li>
+                <li class="option-item"><input type="checkbox" id="q13h" name="q13" value="trans" data-type="transformation" data-label="Shut down, go quiet"><label class="option-label" for="q13h">I shut down and go quiet</label></li>
+                <li class="option-item"><input type="checkbox" id="q13i" name="q13" value="exec" data-type="execution" data-label="Push harder even when not working"><label class="option-label" for="q13i">I push harder, even when it's not working</label></li>
             </ul>
         </div>
 
-        <!-- Question 14 -->
         <div id="q14" class="question-section single-select" data-question="14">
             <div class="question-number">Question 14</div>
             <div class="question-text">Which of these statements resonates most?</div>
             <div class="question-instruction">Select one</div>
             <ul class="options-list">
-                <li class="option-item">
-                    <input type="radio" id="q14a" name="q14" value="exec" data-type="execution" data-label="Challenge is doing">
-                    <label class="option-label" for="q14a">My challenge is mostly about doing—execution, habits, discipline</label>
-                </li>
-                <li class="option-item">
-                    <input type="radio" id="q14b" name="q14" value="nav" data-type="navigation" data-label="Challenge is navigating">
-                    <label class="option-label" for="q14b">My challenge is mostly about navigating—decisions, direction, uncertainty</label>
-                </li>
-                <li class="option-item">
-                    <input type="radio" id="q14c" name="q14" value="trans" data-type="transformation" data-label="Challenge is becoming">
-                    <label class="option-label" for="q14c">My challenge is mostly about becoming—beliefs, identity, inner work</label>
-                </li>
-                <li class="option-item">
-                    <input type="radio" id="q14d" name="q14" value="all" data-type="all" data-label="All three">
-                    <label class="option-label" for="q14d">It's all three, honestly</label>
-                </li>
+                <li class="option-item"><input type="radio" id="q14a" name="q14" value="exec" data-type="execution" data-label="Challenge is doing"><label class="option-label" for="q14a">My challenge is mostly about doing—execution, habits, discipline</label></li>
+                <li class="option-item"><input type="radio" id="q14b" name="q14" value="nav" data-type="navigation" data-label="Challenge is navigating"><label class="option-label" for="q14b">My challenge is mostly about navigating—decisions, direction, uncertainty</label></li>
+                <li class="option-item"><input type="radio" id="q14c" name="q14" value="trans" data-type="transformation" data-label="Challenge is becoming"><label class="option-label" for="q14c">My challenge is mostly about becoming—beliefs, identity, inner work</label></li>
+                <li class="option-item"><input type="radio" id="q14d" name="q14" value="all" data-type="all" data-label="All three"><label class="option-label" for="q14d">It's all three, honestly</label></li>
             </ul>
         </div>
 
-        <!-- Navigation buttons (will be shown/hidden per question) -->
         <div class="nav-buttons" id="nav-buttons" style="display: none;">
             <button class="btn btn-back" id="btn-back" onclick="prevQuestion()">Back</button>
             <button class="btn btn-next" id="btn-next" onclick="nextQuestion()">Continue</button>
         </div>
 
-        <!-- Results Section -->
         <div id="results" class="results-section">
             <div class="result-type">
                 <div class="result-label">Your Journey Type</div>
@@ -1205,7 +456,6 @@
                 <p class="result-subtitle" id="result-subtitle">What you're undertaking has the structure of a quest, not a goal.</p>
             </div>
 
-            <!-- Understanding the Framework -->
             <div class="result-card">
                 <h3>Understanding the Framework</h3>
                 <p>Before we dive into your results, here's the key insight: <strong>every quest contains goals, but not every goal is a quest.</strong></p>
@@ -1226,23 +476,17 @@
                 <div class="score-bars">
                     <div class="score-bar-item">
                         <span class="score-bar-label">Goal</span>
-                        <div class="score-bar-track">
-                            <div class="score-bar-fill" id="goal-bar" style="width: 0%"></div>
-                        </div>
+                        <div class="score-bar-track"><div class="score-bar-fill" id="goal-bar" style="width: 0%"></div></div>
                         <span class="score-bar-value" id="goal-percent">0%</span>
                     </div>
                     <div class="score-bar-item">
                         <span class="score-bar-label">Quest</span>
-                        <div class="score-bar-track">
-                            <div class="score-bar-fill" id="quest-bar" style="width: 0%"></div>
-                        </div>
+                        <div class="score-bar-track"><div class="score-bar-fill" id="quest-bar" style="width: 0%"></div></div>
                         <span class="score-bar-value" id="quest-percent">0%</span>
                     </div>
                     <div class="score-bar-item">
                         <span class="score-bar-label">Hero's Journey</span>
-                        <div class="score-bar-track">
-                            <div class="score-bar-fill" id="hero-bar" style="width: 0%"></div>
-                        </div>
+                        <div class="score-bar-track"><div class="score-bar-fill" id="hero-bar" style="width: 0%"></div></div>
                         <span class="score-bar-value" id="hero-percent">0%</span>
                     </div>
                 </div>
@@ -1255,46 +499,34 @@
                 <div class="score-bars">
                     <div class="score-bar-item">
                         <span class="score-bar-label">Execution</span>
-                        <div class="score-bar-track">
-                            <div class="score-bar-fill" id="exec-bar" style="width: 0%"></div>
-                        </div>
+                        <div class="score-bar-track"><div class="score-bar-fill" id="exec-bar" style="width: 0%"></div></div>
                         <span class="score-bar-value" id="exec-percent">0%</span>
                     </div>
                     <div class="score-bar-item">
                         <span class="score-bar-label">Navigation</span>
-                        <div class="score-bar-track">
-                            <div class="score-bar-fill" id="nav-bar" style="width: 0%"></div>
-                        </div>
+                        <div class="score-bar-track"><div class="score-bar-fill" id="nav-bar" style="width: 0%"></div></div>
                         <span class="score-bar-value" id="nav-percent">0%</span>
                     </div>
                     <div class="score-bar-item">
                         <span class="score-bar-label">Transformation</span>
-                        <div class="score-bar-track">
-                            <div class="score-bar-fill" id="trans-bar" style="width: 0%"></div>
-                        </div>
+                        <div class="score-bar-track"><div class="score-bar-fill" id="trans-bar" style="width: 0%"></div></div>
                         <span class="score-bar-value" id="trans-percent">0%</span>
                     </div>
                 </div>
-                
                 <div class="explainer-box">
                     <p><strong>Execution</strong> = The challenge of doing. Focus, discipline, consistency, showing up. You often know what to do—the struggle is making yourself do it.</p>
                     <p style="margin-top: 0.75rem;"><strong>Navigation</strong> = The challenge of deciding. Direction, clarity, wayfinding through uncertainty. You could probably force yourself to work—you're less sure you're working on the right things.</p>
                     <p style="margin-top: 0.75rem;"><strong>Transformation</strong> = The challenge of becoming. Beliefs, identity, inner work. The external obstacles may be real, but the deeper friction is internal.</p>
                 </div>
-                
                 <p id="struggle-meaning" style="margin-top: 1rem;">Loading...</p>
             </div>
 
             <div class="result-card">
                 <h3>What This Means for You</h3>
                 <p id="result-implications">Loading...</p>
-                
-                <div class="key-insight" id="key-insight">
-                    Loading...
-                </div>
+                <div class="key-insight" id="key-insight">Loading...</div>
             </div>
 
-            <!-- What Now Section -->
             <div class="what-now">
                 <h3>What Now?</h3>
                 <p id="what-now-intro">Loading...</p>
@@ -1309,7 +541,11 @@
                 <div class="tagline">Now you know. Let's get to work.</div>
             </div>
 
-            <!-- Hidden form for anonymous data submission to Formspree -->
+            <!-- Save Results Button - NEW -->
+            <div class="save-buttons">
+                <button class="btn btn-save" onclick="window.print()">📄 Save Results as PDF</button>
+            </div>
+
             <form id="anonymous-data-form" action="https://formspree.io/f/mdaklgzp" method="POST" style="display: none;">
                 <input type="hidden" name="journey_type" id="form-journey-type">
                 <input type="hidden" name="goal_score" id="form-goal-score">
@@ -1323,15 +559,12 @@
                 <input type="hidden" name="all_answers" id="form-all-answers">
             </form>
 
-            <!-- Email capture via ConvertKit (separate from quiz data) -->
             <div class="email-capture">
                 <h3>This is just the beginning</h3>
                 <p>I'm developing a program specifically designed for people on quests—not another goal-setting course, but real preparation for the journey ahead.</p>
                 <p style="font-size: 0.9rem; color: var(--muted);">Join the early interest list to be the first to know when it opens, and to help shape what it becomes.</p>
-                
                 <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
-      <form action="https://app.kit.com/forms/8933714/subscriptions" class="seva-form formkit-form" method="post" data-sv-form="8933714" data-uid="66419c3108" data-format="inline" data-version="5" data-options="{&quot;settings&quot;:{&quot;after_subscribe&quot;:{&quot;action&quot;:&quot;message&quot;,&quot;success_message&quot;:&quot;Success! Now check your email to confirm your subscription.&quot;,&quot;redirect_url&quot;:&quot;&quot;},&quot;analytics&quot;:{&quot;google&quot;:null,&quot;fathom&quot;:null,&quot;facebook&quot;:null,&quot;segment&quot;:null,&quot;pinterest&quot;:null,&quot;sparkloop&quot;:null,&quot;googletagmanager&quot;:null},&quot;modal&quot;:{&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;powered_by&quot;:{&quot;show&quot;:true,&quot;url&quot;:&quot;https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic&quot;},&quot;recaptcha&quot;:{&quot;enabled&quot;:false},&quot;return_visitor&quot;:{&quot;action&quot;:&quot;show&quot;,&quot;custom_content&quot;:&quot;&quot;},&quot;slide_in&quot;:{&quot;display_in&quot;:&quot;bottom_right&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;sticky_bar&quot;:{&quot;display_in&quot;:&quot;top&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15}},&quot;version&quot;:&quot;5&quot;}" min-width="400 500 600 700 800"><div data-style="clean"><ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul><div data-element="fields" data-stacked="false" class="seva-fields formkit-fields"><div class="formkit-field"><input class="formkit-input" name="email_address" aria-label="Email Address" placeholder="Email Address" required="" type="email" style="color: rgb(0, 0, 0); border-color: rgb(227, 227, 227); border-radius: 4px; font-weight: 400;"></div><button data-element="submit" class="formkit-submit formkit-submit" style="color: rgb(255, 255, 255); background-color: rgb(76, 19, 89); border-radius: 4px; font-weight: 400;"><div class="formkit-spinner"><div></div><div></div><div></div></div><span class="">I'm Interested!</span></button></div><div class="formkit-powered-by-convertkit-container"><a href="https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic" data-element="powered-by" class="formkit-powered-by-convertkit" data-variant="dark" target="_blank" rel="nofollow">Built with Kit</a></div></div><style>.formkit-form[data-uid="66419c3108"] *{box-sizing:border-box;}.formkit-form[data-uid="66419c3108"]{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}.formkit-form[data-uid="66419c3108"] legend{border:none;font-size:inherit;margin-bottom:10px;padding:0;position:relative;display:table;}.formkit-form[data-uid="66419c3108"] fieldset{border:0;padding:0.01em 0 0 0;margin:0;min-width:0;}.formkit-form[data-uid="66419c3108"] body:not(:-moz-handler-blocked) fieldset{display:table-cell;}.formkit-form[data-uid="66419c3108"] h1,.formkit-form[data-uid="66419c3108"] h2,.formkit-form[data-uid="66419c3108"] h3,.formkit-form[data-uid="66419c3108"] h4,.formkit-form[data-uid="66419c3108"] h5,.formkit-form[data-uid="66419c3108"] h6{color:inherit;font-size:inherit;font-weight:inherit;}.formkit-form[data-uid="66419c3108"] h2{font-size:1.5em;margin:1em 0;}.formkit-form[data-uid="66419c3108"] h3{font-size:1.17em;margin:1em 0;}.formkit-form[data-uid="66419c3108"] p{color:inherit;font-size:inherit;font-weight:inherit;}.formkit-form[data-uid="66419c3108"] ol:not([template-default]),.formkit-form[data-uid="66419c3108"] ul:not([template-default]),.formkit-form[data-uid="66419c3108"] blockquote:not([template-default]){text-align:left;}.formkit-form[data-uid="66419c3108"] p:not([template-default]),.formkit-form[data-uid="66419c3108"] hr:not([template-default]),.formkit-form[data-uid="66419c3108"] blockquote:not([template-default]),.formkit-form[data-uid="66419c3108"] ol:not([template-default]),.formkit-form[data-uid="66419c3108"] ul:not([template-default]){color:inherit;font-style:initial;}.formkit-form[data-uid="66419c3108"] .ordered-list,.formkit-form[data-uid="66419c3108"] .unordered-list{list-style-position:outside !important;padding-left:1em;}.formkit-form[data-uid="66419c3108"] .list-item{padding-left:0;}.formkit-form[data-uid="66419c3108"][data-format="modal"]{display:none;}.formkit-form[data-uid="66419c3108"][data-format="slide in"]{display:none;}.formkit-form[data-uid="66419c3108"][data-format="sticky bar"]{display:none;}.formkit-sticky-bar .formkit-form[data-uid="66419c3108"][data-format="sticky bar"]{display:block;}.formkit-form[data-uid="66419c3108"] .formkit-input,.formkit-form[data-uid="66419c3108"] .formkit-select,.formkit-form[data-uid="66419c3108"] .formkit-checkboxes{width:100%;}.formkit-form[data-uid="66419c3108"] .formkit-button,.formkit-form[data-uid="66419c3108"] .formkit-submit{border:0;border-radius:5px;color:#ffffff;cursor:pointer;display:inline-block;text-align:center;font-size:15px;font-weight:500;cursor:pointer;margin-bottom:15px;overflow:hidden;padding:0;position:relative;vertical-align:middle;}.formkit-form[data-uid="66419c3108"] .formkit-button:hover,.formkit-form[data-uid="66419c3108"] .formkit-submit:hover,.formkit-form[data-uid="66419c3108"] .formkit-button:focus,.formkit-form[data-uid="66419c3108"] .formkit-submit:focus{outline:none;}.formkit-form[data-uid="66419c3108"] .formkit-button:hover > span,.formkit-form[data-uid="66419c3108"] .formkit-submit:hover > span,.formkit-form[data-uid="66419c3108"] .formkit-button:focus > span,.formkit-form[data-uid="66419c3108"] .formkit-submit:focus > span{background-color:rgba(0,0,0,0.1);}.formkit-form[data-uid="66419c3108"] .formkit-button > span,.formkit-form[data-uid="66419c3108"] .formkit-submit > span{display:block;-webkit-transition:all 300ms ease-in-out;transition:all 300ms ease-in-out;padding:12px 24px;}.formkit-form[data-uid="66419c3108"] .formkit-input{background:#ffffff;font-size:15px;padding:12px;border:1px solid #e3e3e3;-webkit-flex:1 0 auto;-ms-flex:1 0 auto;flex:1 0 auto;line-height:1.4;margin:0;-webkit-transition:border-color ease-out 300ms;transition:border-color ease-out 300ms;}.formkit-form[data-uid="66419c3108"] .formkit-input:focus{outline:none;border-color:#1677be;-webkit-transition:border-color ease 300ms;transition:border-color ease 300ms;}.formkit-form[data-uid="66419c3108"] .formkit-input::-webkit-input-placeholder{color:inherit;opacity:0.8;}.formkit-form[data-uid="66419c3108"] .formkit-input::-moz-placeholder{color:inherit;opacity:0.8;}.formkit-form[data-uid="66419c3108"] .formkit-input:-ms-input-placeholder{color:inherit;opacity:0.8;}.formkit-form[data-uid="66419c3108"] .formkit-input::placeholder{color:inherit;opacity:0.8;}.formkit-form[data-uid="66419c3108"] [data-group="dropdown"]{position:relative;display:inline-block;width:100%;}.formkit-form[data-uid="66419c3108"] [data-group="dropdown"]::before{content:"";top:calc(50% - 2.5px);right:10px;position:absolute;pointer-events:none;border-color:#4f4f4f transparent transparent transparent;border-style:solid;border-width:6px 6px 0 6px;height:0;width:0;z-index:999;}.formkit-form[data-uid="66419c3108"] [data-group="dropdown"] select{height:auto;width:100%;cursor:pointer;color:#333333;line-height:1.4;margin-bottom:0;padding:0 6px;-webkit-appearance:none;-moz-appearance:none;appearance:none;font-size:15px;padding:12px;padding-right:25px;border:1px solid #e3e3e3;background:#ffffff;}.formkit-form[data-uid="66419c3108"] [data-group="dropdown"] select:focus{outline:none;}.formkit-form[data-uid="66419c3108"] [data-group="checkboxes"]{text-align:left;margin:0;}.formkit-form[data-uid="66419c3108"] [data-group="checkboxes"] [data-group="checkbox"]{margin-bottom:10px;}.formkit-form[data-uid="66419c3108"] [data-group="checkboxes"] [data-group="checkbox"] *{cursor:pointer;}.formkit-form[data-uid="66419c3108"] [data-group="checkboxes"] [data-group="checkbox"]:last-of-type{margin-bottom:0;}.formkit-form[data-uid="66419c3108"] [data-group="checkboxes"] [data-group="checkbox"] input[type="checkbox"]{display:none;}.formkit-form[data-uid="66419c3108"] [data-group="checkboxes"] [data-group="checkbox"] input[type="checkbox"] + label::after{content:none;}.formkit-form[data-uid="66419c3108"] [data-group="checkboxes"] [data-group="checkbox"] input[type="checkbox"]:checked + label::after{border-color:#ffffff;content:"";}.formkit-form[data-uid="66419c3108"] [data-group="checkboxes"] [data-group="checkbox"] input[type="checkbox"]:checked + label::before{background:#10bf7a;border-color:#10bf7a;}.formkit-form[data-uid="66419c3108"] [data-group="checkboxes"] [data-group="checkbox"] label{position:relative;display:inline-block;padding-left:28px;}.formkit-form[data-uid="66419c3108"] [data-group="checkboxes"] [data-group="checkbox"] label::before,.formkit-form[data-uid="66419c3108"] [data-group="checkboxes"] [data-group="checkbox"] label::after{position:absolute;content:"";display:inline-block;}.formkit-form[data-uid="66419c3108"] [data-group="checkboxes"] [data-group="checkbox"] label::before{height:16px;width:16px;border:1px solid #e3e3e3;background:#ffffff;left:0px;top:3px;}.formkit-form[data-uid="66419c3108"] [data-group="checkboxes"] [data-group="checkbox"] label::after{height:4px;width:8px;border-left:2px solid #4d4d4d;border-bottom:2px solid #4d4d4d;-webkit-transform:rotate(-45deg);-ms-transform:rotate(-45deg);transform:rotate(-45deg);left:4px;top:8px;}.formkit-form[data-uid="66419c3108"] .formkit-alert{background:#f9fafb;border:1px solid #e3e3e3;border-radius:5px;-webkit-flex:1 0 auto;-ms-flex:1 0 auto;flex:1 0 auto;list-style:none;margin:25px auto;padding:12px;text-align:center;width:100%;}.formkit-form[data-uid="66419c3108"] .formkit-alert:empty{display:none;}.formkit-form[data-uid="66419c3108"] .formkit-alert-success{background:#d3fbeb;border-color:#10bf7a;color:#0c905c;}.formkit-form[data-uid="66419c3108"] .formkit-alert-error{background:#fde8e2;border-color:#f2643b;color:#ea4110;}.formkit-form[data-uid="66419c3108"] .formkit-spinner{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;height:0px;width:0px;margin:0 auto;position:absolute;top:0;left:0;right:0;width:0px;overflow:hidden;text-align:center;-webkit-transition:all 300ms ease-in-out;transition:all 300ms ease-in-out;}.formkit-form[data-uid="66419c3108"] .formkit-spinner > div{margin:auto;width:12px;height:12px;background-color:#fff;opacity:0.3;border-radius:100%;display:inline-block;-webkit-animation:formkit-bouncedelay-formkit-form-data-uid-66419c3108- 1.4s infinite ease-in-out both;animation:formkit-bouncedelay-formkit-form-data-uid-66419c3108- 1.4s infinite ease-in-out both;}.formkit-form[data-uid="66419c3108"] .formkit-spinner > div:nth-child(1){-webkit-animation-delay:-0.32s;animation-delay:-0.32s;}.formkit-form[data-uid="66419c3108"] .formkit-spinner > div:nth-child(2){-webkit-animation-delay:-0.16s;animation-delay:-0.16s;}.formkit-form[data-uid="66419c3108"] .formkit-submit[data-active] .formkit-spinner{opacity:1;height:100%;width:50px;}.formkit-form[data-uid="66419c3108"] .formkit-submit[data-active] .formkit-spinner ~ span{opacity:0;}.formkit-form[data-uid="66419c3108"] .formkit-powered-by[data-active="false"]{opacity:0.35;}.formkit-form[data-uid="66419c3108"] .formkit-powered-by-convertkit-container{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;width:100%;margin:10px 0;position:relative;}.formkit-form[data-uid="66419c3108"] .formkit-powered-by-convertkit-container[data-active="false"]{opacity:0.35;}.formkit-form[data-uid="66419c3108"] .formkit-powered-by-convertkit{-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;background-color:#ffffff;border-radius:9px;color:#3d3d3d;cursor:pointer;display:block;height:36px;margin:0 auto;opacity:0.95;padding:0;-webkit-text-decoration:none;text-decoration:none;text-indent:100%;-webkit-transition:ease-in-out all 200ms;transition:ease-in-out all 200ms;white-space:nowrap;overflow:hidden;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;width:157px;background-repeat:no-repeat;background-position:center;background-image:url("data:image/svg+xml;charset=utf8,%3Csvg width='133' height='36' viewBox='0 0 133 36' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.861 25.5C0.735 25.5 0.651 25.416 0.651 25.29V10.548C0.651 10.422 0.735 10.338 0.861 10.338H6.279C9.072 10.338 10.668 11.451 10.668 13.824C10.668 15.819 9.219 16.932 8.001 17.226C7.707 17.268 7.707 17.625 8.022 17.688C9.912 18.108 11.088 19.116 11.088 21.321C11.088 23.715 9.429 25.5 6.426 25.5H0.861ZM5.397 23.085C6.825 23.085 7.518 22.224 7.518 21.006C7.518 19.683 6.825 18.948 5.397 18.948H4.2V23.085H5.397ZM5.313 16.617C6.51 16.617 7.245 15.945 7.245 14.601C7.245 13.383 6.51 12.753 5.25 12.753H4.2V16.617H5.313ZM17.9758 23.883C17.9758 23.568 17.6608 23.505 17.5348 23.799C17.0308 24.954 16.1698 25.731 14.5528 25.731C12.8728 25.731 12.0958 24.471 12.0958 22.707V14.937C12.0958 14.811 12.1798 14.727 12.3058 14.727H15.2248C15.3508 14.727 15.4348 14.811 15.4348 14.937V21.657C15.4348 22.581 15.7708 23.022 16.4638 23.022C17.1778 23.022 17.6188 22.581 17.6188 21.657V14.937C17.6188 14.811 17.7028 14.727 17.8288 14.727H20.7478C20.8738 14.727 20.9578 14.811 20.9578 14.937V25.29C20.9578 25.416 20.8738 25.5 20.7478 25.5H18.1858C18.0598 25.5 17.9758 25.416 17.9758 25.29V23.883ZM25.6141 25.29C25.6141 25.416 25.5301 25.5 25.4041 25.5H22.4851C22.3591 25.5 22.2751 25.416 22.2751 25.29V14.937C22.2751 14.811 22.3591 14.727 22.4851 14.727H25.4041C25.5301 14.727 25.6141 14.811 25.6141 14.937V25.29ZM23.9131 13.74C22.8001 13.74 22.0441 12.942 22.0441 11.934C22.0441 10.926 22.8001 10.107 23.9131 10.107C25.0051 10.107 25.7611 10.926 25.7611 11.934C25.7611 12.942 25.0051 13.74 23.9131 13.74ZM26.7883 10.548C26.7883 10.422 26.8723 10.338 26.9983 10.338H29.9173C30.0433 10.338 30.1273 10.422 30.1273 10.548V22.056C30.1273 22.749 30.2533 23.085 30.8203 23.085C31.0093 23.085 31.1983 23.043 31.3663 23.001C31.5133 22.959 31.6183 22.959 31.6183 23.127V25.059C31.6183 25.164 31.5763 25.269 31.4923 25.311C30.9673 25.521 30.2953 25.71 29.5813 25.71C27.7123 25.71 26.7883 24.639 26.7883 22.476V10.548ZM32.4237 14.727C32.8227 14.727 32.9277 14.538 32.9697 14.055L33.1167 12.039C33.1167 11.913 33.2217 11.829 33.3477 11.829H35.8887C36.0147 11.829 36.0987 11.913 36.0987 12.039V14.517C36.0987 14.643 36.1827 14.727 36.3087 14.727H38.2827C38.4087 14.727 38.4927 14.811 38.4927 14.937V16.659C38.4927 16.785 38.4087 16.869 38.2827 16.869H36.0777V22.056C36.0777 22.875 36.5397 23.085 37.0647 23.085C37.4847 23.085 37.9467 22.938 38.3247 22.707C38.4717 22.623 38.5767 22.665 38.5767 22.833V24.828C38.5767 24.933 38.5347 25.017 38.4507 25.08C37.8417 25.458 36.9807 25.71 36.0357 25.71C34.2927 25.71 32.7387 24.912 32.7387 22.476V16.869H31.8567C31.7307 16.869 31.6467 16.785 31.6467 16.659V14.937C31.6467 14.811 31.7307 14.727 31.8567 14.727H32.4237ZM51.3808 14.727C51.5068 14.727 51.5908 14.79 51.6118 14.916L52.3888 19.851L52.5778 21.174C52.6198 21.468 52.9558 21.468 52.9768 21.174C53.0398 20.712 53.0818 20.271 53.1658 19.83L53.8798 14.916C53.9008 14.79 53.9848 14.727 54.1108 14.727H56.6728C56.8198 14.727 56.8828 14.811 56.8618 14.958L54.6778 25.311C54.6568 25.437 54.5728 25.5 54.4468 25.5H51.3178C51.1918 25.5 51.1078 25.437 51.0868 25.311L50.1208 20.082L49.8898 18.633C49.8688 18.444 49.6588 18.444 49.6378 18.633L49.4068 20.103L48.5458 25.311C48.5248 25.437 48.4408 25.5 48.3148 25.5H45.2068C45.0808 25.5 44.9968 25.437 44.9758 25.311L42.8128 14.958C42.7918 14.811 42.8548 14.727 43.0018 14.727H45.9628C46.0888 14.727 46.1728 14.79 46.1938 14.916L46.9288 19.83C47.0128 20.271 47.0758 20.754 47.1388 21.195C47.2018 21.51 47.4748 21.531 47.5378 21.195L47.7478 19.872L48.6088 14.916C48.6298 14.79 48.7138 14.727 48.8398 14.727H51.3808ZM61.1582 25.29C61.1582 25.416 61.0742 25.5 60.9482 25.5H58.0292C57.9032 25.5 57.8192 25.416 57.8192 25.29V14.937C57.8192 14.811 57.9032 14.727 58.0292 14.727H60.9482C61.0742 14.727 61.1582 14.811 61.1582 14.937V25.29ZM59.4572 13.74C58.3442 13.74 57.5882 12.942 57.5882 11.934C57.5882 10.926 58.3442 10.107 59.4572 10.107C60.5492 10.107 61.3052 10.926 61.3052 11.934C61.3052 12.942 60.5492 13.74 59.4572 13.74ZM62.8154 14.727C63.2144 14.727 63.3194 14.538 63.3614 14.055L63.5084 12.039C63.5084 11.913 63.6134 11.829 63.7394 11.829H66.2804C66.4064 11.829 66.4904 11.913 66.4904 12.039V14.517C66.4904 14.643 66.5744 14.727 66.7004 14.727H68.6744C68.8004 14.727 68.8844 14.811 68.8844 14.937V16.659C68.8844 16.785 68.8004 16.869 68.6744 16.869H66.4694V22.056C66.4694 22.875 66.9314 23.085 67.4564 23.085C67.8764 23.085 68.3384 22.938 68.7164 22.707C68.8634 22.623 68.9684 22.665 68.9684 22.833V24.828C68.9684 24.933 68.9264 25.017 68.8424 25.08C68.2334 25.458 67.3724 25.71 66.4274 25.71C64.6844 25.71 63.1304 24.912 63.1304 22.476V16.869H62.2484C62.1224 16.869 62.0384 16.785 62.0384 16.659V14.937C62.0384 14.811 62.1224 14.727 62.2484 14.727H62.8154ZM73.4298 16.323C73.4298 16.638 73.7868 16.68 73.9128 16.407C74.3748 15.315 75.1308 14.496 76.6008 14.496C78.2178 14.496 78.9528 15.609 78.9528 17.373V25.29C78.9528 25.416 78.8688 25.5 78.7428 25.5H75.8238C75.6978 25.5 75.6138 25.416 75.6138 25.29V18.633C75.6138 17.709 75.2778 17.268 74.5848 17.268C73.8708 17.268 73.4298 17.709 73.4298 18.633V25.29C73.4298 25.416 73.3458 25.5 73.2198 25.5H70.3008C70.1748 25.5 70.0908 25.416 70.0908 25.29V10.548C70.0908 10.422 70.1748 10.338 70.3008 10.338H73.2198C73.3458 10.338 73.4298 10.422 73.4298 10.548V16.323Z' fill='%231E1E1E'/%3E%3Cpath d='M100.132 16.3203C105.58 17.3761 107.272 22.4211 107.318 27.4961C107.318 27.6101 107.226 27.7041 107.112 27.7041H100.252C100.138 27.7041 100.046 27.6121 100.046 27.5001C100.026 23.5629 99.3877 20.0896 95.4865 19.9396C95.3705 19.9356 95.2725 20.0276 95.2725 20.1456V27.5001C95.2725 27.6141 95.1806 27.7061 95.0666 27.7061H88.206C88.092 27.7061 88 27.6141 88 27.5001V8.75585C88 8.64187 88.092 8.54989 88.206 8.54989H95.0686C95.1826 8.54989 95.2745 8.64187 95.2745 8.75585V15.7764C95.2745 15.8804 95.3585 15.9644 95.4625 15.9644C95.5445 15.9644 95.6185 15.9104 95.6425 15.8324C97.4081 10.0416 100.709 8.58588 106.07 8.55189C106.184 8.55189 106.276 8.64387 106.276 8.75785V15.7604C106.276 15.8744 106.184 15.9664 106.07 15.9664H100.166C100.066 15.9664 99.9856 16.0464 99.9856 16.1464C99.9856 16.2304 100.048 16.3043 100.132 16.3203ZM118.918 20.7095V16.1704C118.918 16.0564 119.01 15.9644 119.124 15.9644H124.173C124.273 15.9644 124.353 15.8844 124.353 15.7844C124.353 15.6985 124.291 15.6245 124.207 15.6085C120.256 14.8246 118.432 12.5511 118.37 8.75585C118.368 8.64387 118.458 8.54989 118.572 8.54989H125.986C126.1 8.54989 126.192 8.64187 126.192 8.75585V11.9532C126.192 12.0672 126.284 12.1592 126.398 12.1592H130.649C130.763 12.1592 130.855 12.2511 130.855 12.3651V15.7624C130.855 15.8764 130.763 15.9684 130.649 15.9684H126.398C126.284 15.9684 126.192 16.0604 126.192 16.1744V19.8356C126.192 21.1294 126.986 21.5553 128.04 21.5553C129.692 21.5553 131.323 20.8114 131.977 20.4735C132.113 20.4035 132.277 20.5015 132.277 20.6555V26.3543C132.277 26.5063 132.193 26.6463 132.059 26.7183C131.413 27.0582 129.418 28 127.136 28C122.435 27.996 118.918 26.0824 118.918 20.7095ZM109.266 27.4981V16.1704C109.266 16.0564 109.358 15.9644 109.472 15.9644H116.334C116.448 15.9644 116.54 16.0564 116.54 16.1704V27.4981C116.54 27.6121 116.448 27.7041 116.334 27.7041H109.472C109.358 27.7021 109.266 27.6101 109.266 27.4981ZM108.876 11.4913C108.876 13.4189 110.238 14.9826 112.853 14.9826C115.469 14.9826 116.83 13.4189 116.83 11.4913C116.83 9.56369 115.471 8 112.853 8C110.238 8 108.876 9.56369 108.876 11.4913Z' fill='%231E1E1E'/%3E%3C/svg%3E");}.formkit-form[data-uid="66419c3108"] .formkit-powered-by-convertkit:hover,.formkit-form[data-uid="66419c3108"] .formkit-powered-by-convertkit:focus{background-color:#ffffff;-webkit-transform:scale(1.025) perspective(1px);-ms-transform:scale(1.025) perspective(1px);transform:scale(1.025) perspective(1px);opacity:1;}.formkit-form[data-uid="66419c3108"] .formkit-powered-by-convertkit[data-variant="dark"],.formkit-form[data-uid="66419c3108"] .formkit-powered-by-convertkit[data-variant="light"]{background-color:transparent;border-color:transparent;width:133px;}.formkit-form[data-uid="66419c3108"] .formkit-powered-by-convertkit[data-variant="light"]{color:#ffffff;background-image:url("data:image/svg+xml;charset=utf8,%3Csvg width='133' height='36' viewBox='0 0 133 36' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.861 25.5C0.735 25.5 0.651 25.416 0.651 25.29V10.548C0.651 10.422 0.735 10.338 0.861 10.338H6.279C9.072 10.338 10.668 11.451 10.668 13.824C10.668 15.819 9.219 16.932 8.001 17.226C7.707 17.268 7.707 17.625 8.022 17.688C9.912 18.108 11.088 19.116 11.088 21.321C11.088 23.715 9.429 25.5 6.426 25.5H0.861ZM5.397 23.085C6.825 23.085 7.518 22.224 7.518 21.006C7.518 19.683 6.825 18.948 5.397 18.948H4.2V23.085H5.397ZM5.313 16.617C6.51 16.617 7.245 15.945 7.245 14.601C7.245 13.383 6.51 12.753 5.25 12.753H4.2V16.617H5.313ZM17.9758 23.883C17.9758 23.568 17.6608 23.505 17.5348 23.799C17.0308 24.954 16.1698 25.731 14.5528 25.731C12.8728 25.731 12.0958 24.471 12.0958 22.707V14.937C12.0958 14.811 12.1798 14.727 12.3058 14.727H15.2248C15.3508 14.727 15.4348 14.811 15.4348 14.937V21.657C15.4348 22.581 15.7708 23.022 16.4638 23.022C17.1778 23.022 17.6188 22.581 17.6188 21.657V14.937C17.6188 14.811 17.7028 14.727 17.8288 14.727H20.7478C20.8738 14.727 20.9578 14.811 20.9578 14.937V25.29C20.9578 25.416 20.8738 25.5 20.7478 25.5H18.1858C18.0598 25.5 17.9758 25.416 17.9758 25.29V23.883ZM25.6141 25.29C25.6141 25.416 25.5301 25.5 25.4041 25.5H22.4851C22.3591 25.5 22.2751 25.416 22.2751 25.29V14.937C22.2751 14.811 22.3591 14.727 22.4851 14.727H25.4041C25.5301 14.727 25.6141 14.811 25.6141 14.937V25.29ZM23.9131 13.74C22.8001 13.74 22.0441 12.942 22.0441 11.934C22.0441 10.926 22.8001 10.107 23.9131 10.107C25.0051 10.107 25.7611 10.926 25.7611 11.934C25.7611 12.942 25.0051 13.74 23.9131 13.74ZM26.7883 10.548C26.7883 10.422 26.8723 10.338 26.9983 10.338H29.9173C30.0433 10.338 30.1273 10.422 30.1273 10.548V22.056C30.1273 22.749 30.2533 23.085 30.8203 23.085C31.0093 23.085 31.1983 23.043 31.3663 23.001C31.5133 22.959 31.6183 22.959 31.6183 23.127V25.059C31.6183 25.164 31.5763 25.269 31.4923 25.311C30.9673 25.521 30.2953 25.71 29.5813 25.71C27.7123 25.71 26.7883 24.639 26.7883 22.476V10.548ZM32.4237 14.727C32.8227 14.727 32.9277 14.538 32.9697 14.055L33.1167 12.039C33.1167 11.913 33.2217 11.829 33.3477 11.829H35.8887C36.0147 11.829 36.0987 11.913 36.0987 12.039V14.517C36.0987 14.643 36.1827 14.727 36.3087 14.727H38.2827C38.4087 14.727 38.4927 14.811 38.4927 14.937V16.659C38.4927 16.785 38.4087 16.869 38.2827 16.869H36.0777V22.056C36.0777 22.875 36.5397 23.085 37.0647 23.085C37.4847 23.085 37.9467 22.938 38.3247 22.707C38.4717 22.623 38.5767 22.665 38.5767 22.833V24.828C38.5767 24.933 38.5347 25.017 38.4507 25.08C37.8417 25.458 36.9807 25.71 36.0357 25.71C34.2927 25.71 32.7387 24.912 32.7387 22.476V16.869H31.8567C31.7307 16.869 31.6467 16.785 31.6467 16.659V14.937C31.6467 14.811 31.7307 14.727 31.8567 14.727H32.4237ZM51.3808 14.727C51.5068 14.727 51.5908 14.79 51.6118 14.916L52.3888 19.851L52.5778 21.174C52.6198 21.468 52.9558 21.468 52.9768 21.174C53.0398 20.712 53.0818 20.271 53.1658 19.83L53.8798 14.916C53.9008 14.79 53.9848 14.727 54.1108 14.727H56.6728C56.8198 14.727 56.8828 14.811 56.8618 14.958L54.6778 25.311C54.6568 25.437 54.5728 25.5 54.4468 25.5H51.3178C51.1918 25.5 51.1078 25.437 51.0868 25.311L50.1208 20.082L49.8898 18.633C49.8688 18.444 49.6588 18.444 49.6378 18.633L49.4068 20.103L48.5458 25.311C48.5248 25.437 48.4408 25.5 48.3148 25.5H45.2068C45.0808 25.5 44.9968 25.437 44.9758 25.311L42.8128 14.958C42.7918 14.811 42.8548 14.727 43.0018 14.727H45.9628C46.0888 14.727 46.1728 14.79 46.1938 14.916L46.9288 19.83C47.0128 20.271 47.0758 20.754 47.1388 21.195C47.2018 21.51 47.4748 21.531 47.5378 21.195L47.7478 19.872L48.6088 14.916C48.6298 14.79 48.7138 14.727 48.8398 14.727H51.3808ZM61.1582 25.29C61.1582 25.416 61.0742 25.5 60.9482 25.5H58.0292C57.9032 25.5 57.8192 25.416 57.8192 25.29V14.937C57.8192 14.811 57.9032 14.727 58.0292 14.727H60.9482C61.0742 14.727 61.1582 14.811 61.1582 14.937V25.29ZM59.4572 13.74C58.3442 13.74 57.5882 12.942 57.5882 11.934C57.5882 10.926 58.3442 10.107 59.4572 10.107C60.5492 10.107 61.3052 10.926 61.3052 11.934C61.3052 12.942 60.5492 13.74 59.4572 13.74ZM62.8154 14.727C63.2144 14.727 63.3194 14.538 63.3614 14.055L63.5084 12.039C63.5084 11.913 63.6134 11.829 63.7394 11.829H66.2804C66.4064 11.829 66.4904 11.913 66.4904 12.039V14.517C66.4904 14.643 66.5744 14.727 66.7004 14.727H68.6744C68.8004 14.727 68.8844 14.811 68.8844 14.937V16.659C68.8844 16.785 68.8004 16.869 68.6744 16.869H66.4694V22.056C66.4694 22.875 66.9314 23.085 67.4564 23.085C67.8764 23.085 68.3384 22.938 68.7164 22.707C68.8634 22.623 68.9684 22.665 68.9684 22.833V24.828C68.9684 24.933 68.9264 25.017 68.8424 25.08C68.2334 25.458 67.3724 25.71 66.4274 25.71C64.6844 25.71 63.1304 24.912 63.1304 22.476V16.869H62.2484C62.1224 16.869 62.0384 16.785 62.0384 16.659V14.937C62.0384 14.811 62.1224 14.727 62.2484 14.727H62.8154ZM73.4298 16.323C73.4298 16.638 73.7868 16.68 73.9128 16.407C74.3748 15.315 75.1308 14.496 76.6008 14.496C78.2178 14.496 78.9528 15.609 78.9528 17.373V25.29C78.9528 25.416 78.8688 25.5 78.7428 25.5H75.8238C75.6978 25.5 75.6138 25.416 75.6138 25.29V18.633C75.6138 17.709 75.2778 17.268 74.5848 17.268C73.8708 17.268 73.4298 17.709 73.4298 18.633V25.29C73.4298 25.416 73.3458 25.5 73.2198 25.5H70.3008C70.1748 25.5 70.0908 25.416 70.0908 25.29V10.548C70.0908 10.422 70.1748 10.338 70.3008 10.338H73.2198C73.3458 10.338 73.4298 10.422 73.4298 10.548V16.323Z' fill='white'/%3E%3Cpath d='M100.132 16.3203C105.58 17.3761 107.272 22.4211 107.318 27.4961C107.318 27.6101 107.226 27.7041 107.112 27.7041H100.252C100.138 27.7041 100.046 27.6121 100.046 27.5001C100.026 23.5629 99.3877 20.0896 95.4865 19.9396C95.3705 19.9356 95.2725 20.0276 95.2725 20.1456V27.5001C95.2725 27.6141 95.1806 27.7061 95.0666 27.7061H88.206C88.092 27.7061 88 27.6141 88 27.5001V8.75585C88 8.64187 88.092 8.54989 88.206 8.54989H95.0686C95.1826 8.54989 95.2745 8.64187 95.2745 8.75585V15.7764C95.2745 15.8804 95.3585 15.9644 95.4625 15.9644C95.5445 15.9644 95.6185 15.9104 95.6425 15.8324C97.4081 10.0416 100.709 8.58588 106.07 8.55189C106.184 8.55189 106.276 8.64387 106.276 8.75785V15.7604C106.276 15.8744 106.184 15.9664 106.07 15.9664H100.166C100.066 15.9664 99.9856 16.0464 99.9856 16.1464C99.9856 16.2304 100.048 16.3043 100.132 16.3203ZM118.918 20.7095V16.1704C118.918 16.0564 119.01 15.9644 119.124 15.9644H124.173C124.273 15.9644 124.353 15.8844 124.353 15.7844C124.353 15.6985 124.291 15.6245 124.207 15.6085C120.256 14.8246 118.432 12.5511 118.37 8.75585C118.368 8.64387 118.458 8.54989 118.572 8.54989H125.986C126.1 8.54989 126.192 8.64187 126.192 8.75585V11.9532C126.192 12.0672 126.284 12.1592 126.398 12.1592H130.649C130.763 12.1592 130.855 12.2511 130.855 12.3651V15.7624C130.855 15.8764 130.763 15.9684 130.649 15.9684H126.398C126.284 15.9684 126.192 16.0604 126.192 16.1744V19.8356C126.192 21.1294 126.986 21.5553 128.04 21.5553C129.692 21.5553 131.323 20.8114 131.977 20.4735C132.113 20.4035 132.277 20.5015 132.277 20.6555V26.3543C132.277 26.5063 132.193 26.6463 132.059 26.7183C131.413 27.0582 129.418 28 127.136 28C122.435 27.996 118.918 26.0824 118.918 20.7095ZM109.266 27.4981V16.1704C109.266 16.0564 109.358 15.9644 109.472 15.9644H116.334C116.448 15.9644 116.54 16.0564 116.54 16.1704V27.4981C116.54 27.6121 116.448 27.7041 116.334 27.7041H109.472C109.358 27.7021 109.266 27.6101 109.266 27.4981ZM108.876 11.4913C108.876 13.4189 110.238 14.9826 112.853 14.9826C115.469 14.9826 116.83 13.4189 116.83 11.4913C116.83 9.56369 115.471 8 112.853 8C110.238 8 108.876 9.56369 108.876 11.4913Z' fill='white'/%3E%3C/svg%3E");}@-webkit-keyframes formkit-bouncedelay-formkit-form-data-uid-66419c3108-{0%,80%,100%{-webkit-transform:scale(0);-ms-transform:scale(0);transform:scale(0);}40%{-webkit-transform:scale(1);-ms-transform:scale(1);transform:scale(1);}}@keyframes formkit-bouncedelay-formkit-form-data-uid-66419c3108-{0%,80%,100%{-webkit-transform:scale(0);-ms-transform:scale(0);transform:scale(0);}40%{-webkit-transform:scale(1);-ms-transform:scale(1);transform:scale(1);}}.formkit-form[data-uid="66419c3108"] blockquote{padding:10px 20px;margin:0 0 20px;border-left:5px solid #e1e1e1;}.formkit-form[data-uid="66419c3108"] .seva-custom-content{padding:15px;font-size:16px;color:#fff;mix-blend-mode:difference;}.formkit-form[data-uid="66419c3108"] .formkit-modal.guard{max-width:420px;width:100%;} .formkit-form[data-uid="66419c3108"]{max-width:700px;}.formkit-form[data-uid="66419c3108"] [data-style="clean"]{width:100%;}.formkit-form[data-uid="66419c3108"] .formkit-fields{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;margin:0 auto;}.formkit-form[data-uid="66419c3108"] .formkit-field,.formkit-form[data-uid="66419c3108"] .formkit-submit{margin:0 0 15px 0;-webkit-flex:1 0 100%;-ms-flex:1 0 100%;flex:1 0 100%;}.formkit-form[data-uid="66419c3108"] .formkit-powered-by-convertkit-container{margin:0;}.formkit-form[data-uid="66419c3108"] .formkit-submit{position:static;}.formkit-form[data-uid="66419c3108"][min-width~="700"] [data-style="clean"],.formkit-form[data-uid="66419c3108"][min-width~="800"] [data-style="clean"]{padding:10px;padding-top:56px;}.formkit-form[data-uid="66419c3108"][min-width~="700"] .formkit-fields[data-stacked="false"],.formkit-form[data-uid="66419c3108"][min-width~="800"] .formkit-fields[data-stacked="false"]{margin-left:-5px;margin-right:-5px;}.formkit-form[data-uid="66419c3108"][min-width~="700"] .formkit-fields[data-stacked="false"] .formkit-field,.formkit-form[data-uid="66419c3108"][min-width~="800"] .formkit-fields[data-stacked="false"] .formkit-field,.formkit-form[data-uid="66419c3108"][min-width~="700"] .formkit-fields[data-stacked="false"] .formkit-submit,.formkit-form[data-uid="66419c3108"][min-width~="800"] .formkit-fields[data-stacked="false"] .formkit-submit{margin:0 5px 15px 5px;}.formkit-form[data-uid="66419c3108"][min-width~="700"] .formkit-fields[data-stacked="false"] .formkit-field,.formkit-form[data-uid="66419c3108"][min-width~="800"] .formkit-fields[data-stacked="false"] .formkit-field{-webkit-flex:100 1 auto;-ms-flex:100 1 auto;flex:100 1 auto;}.formkit-form[data-uid="66419c3108"][min-width~="700"] .formkit-fields[data-stacked="false"] .formkit-submit,.formkit-form[data-uid="66419c3108"][min-width~="800"] .formkit-fields[data-stacked="false"] .formkit-submit{-webkit-flex:1 1 auto;-ms-flex:1 1 auto;flex:1 1 auto;} </style></form>
-                
+                <form action="https://app.kit.com/forms/8933714/subscriptions" class="seva-form formkit-form" method="post" data-sv-form="8933714" data-uid="66419c3108" data-format="inline" data-version="5"><div data-style="clean"><ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul><div data-element="fields" data-stacked="false" class="seva-fields formkit-fields"><div class="formkit-field"><input class="formkit-input" name="email_address" aria-label="Email Address" placeholder="Email Address" required="" type="email" style="color: rgb(0, 0, 0); border-color: rgb(227, 227, 227); border-radius: 4px; font-weight: 400;"></div><button data-element="submit" class="formkit-submit formkit-submit" style="color: rgb(255, 255, 255); background-color: rgb(76, 19, 89); border-radius: 4px; font-weight: 400;"><div class="formkit-spinner"><div></div><div></div><div></div></div><span class="">I'm Interested!</span></button></div></div></form>
                 <p class="privacy-note">No spam, ever. Just occasional updates about the journey ahead. Unsubscribe anytime. <a href="privacy.html">Privacy Policy</a></p>
             </div>
 
@@ -1340,81 +573,22 @@
     </div>
 
     <script>
-        // Quiz state
         let currentQuestion = 0;
-        const totalQuestions = 15; // Including q0
-        
-        // Scoring
-        let scores = {
-            goal: 0,
-            quest: 0,
-            hero: 0,
-            execution: 0,
-            navigation: 0,
-            transformation: 0
-        };
+        const totalQuestions = 15;
+        let scores = { goal: 0, quest: 0, hero: 0, execution: 0, navigation: 0, transformation: 0 };
 
-        // Results content
         const journeyResults = {
-            goal: {
-                title: "This Looks Like a Goal",
-                subtitle: "What you're pursuing has the structure of a goal or project—clear, achievable, and plannable.",
-                meaning: "A goal is a specific outcome you can define, measure, and achieve with the right effort and discipline. The path is largely visible, the obstacles are knowable, and you're essentially the right person to do this—you just need to execute. This isn't a lesser category; many meaningful things are goals. The key is matching your approach to the reality of what you're facing.",
-                implications: "You can use traditional project management and goal-setting tools here. Break it down, set milestones, find accountability, and execute. The main risk is inconsistency—not showing up. A coach, system, or structure can help you stay on track. You don't need to reinvent yourself to achieve this. You need to do the work.",
-                keyInsight: "Success here is mostly about consistency. The gap between where you are and where you want to be is crossable with sustained effort and the right structure.",
-                whatNowIntro: "For goals, the path forward is usually clear—you just need to walk it.",
-                actionStep: "Identify the single most important next action and schedule it. Then find an accountability partner or system to help you stay consistent.",
-                closing: "The path is clear. Now walk it."
-            },
-            quest: {
-                title: "You're On a Quest",
-                subtitle: "What you're undertaking has the structure of a quest—a longer journey through uncertain territory.",
-                meaning: "A quest contains many goals, but it's more than any single goal. The destination may be somewhat clear, but the path is not. You'll encounter obstacles you can't predict, and some of them will require you to grow and adapt. The map you make today will need to be redrawn. Part of the work is figuring out what the work even is.",
-                implications: "Traditional goal-setting tools will help, but they're not enough. You need ways to navigate uncertainty, make decisions with incomplete information, and stay connected to why this matters when the path gets murky. The overwhelm and decision fatigue you've felt aren't signs of failure—they're signs you've been using the wrong tools. You need a compass more than a GPS.",
-                keyInsight: "On a quest, 'failure' looks different. Testing things that don't work isn't failing—it's navigation. The real risk is standing still, or using all your energy on busy work that doesn't move you forward.",
-                whatNowIntro: "For quests, the first step isn't always obvious—and that's okay.",
-                actionStep: "Instead of planning the whole path, identify one small experiment you can run in the next week to learn something you don't currently know about your quest.",
-                closing: "You're not failing. You're on a quest."
-            },
-            hero: {
-                title: "You're Answering a Deeper Call",
-                subtitle: "What you're pursuing has the structure of a hero's journey—a transformational passage that will remake you.",
-                meaning: "This isn't just about getting somewhere or even about the journey. It's about who you'll become. Something is calling you that won't let go, and you sense—even if you can't fully articulate it—that you can't get there as who you currently are. Parts of your old self may need to fall away. This is the territory of crisis, calling, and fundamental change.",
-                implications: "This journey will break you open, and that's not a bug—it's a feature. The obstacles aren't just things to overcome; they're the very mechanisms of your transformation. You'll need allies who can see you clearly, who won't let you hide from yourself, and who can hold space for the parts of this that feel like dying. Productivity tools won't help much here. Presence, support, and courage will.",
-                keyInsight: "The call is real, even when you can't fully explain it. The discomfort you feel isn't a sign that something is wrong—it's a sign that something is trying to emerge.",
-                whatNowIntro: "For hero's journeys, the first step is often internal, not external.",
-                actionStep: "Find one person who can witness your journey without trying to fix it—someone who can simply be present as you navigate this passage. You don't have to do this alone.",
-                closing: "The call is real. Answer it."
-            },
-            mixed: {
-                title: "Your Journey Has Multiple Layers",
-                subtitle: "What you're pursuing has elements of both quest and deeper transformation.",
-                meaning: "Your scores suggest this isn't a simple goal, but something more complex—part quest, part hero's journey. This is common for significant life undertakings. There's a practical journey (the quest) and an inner journey (the transformation) happening simultaneously. They're intertwined, and progress on one often requires progress on the other.",
-                implications: "You'll need to work on multiple levels: the practical decisions and navigation of the outer journey, and the beliefs, identity, and inner work of the transformation. Neither can be skipped. The good news is that working on one tends to unlock the other. The challenge is knowing which one needs attention at any given moment.",
-                keyInsight: "Sometimes you need to solve the practical problem. Sometimes you need to sit with the inner one. Learning to discern which is which—that's the skill to develop.",
-                whatNowIntro: "For layered journeys, balance is key—but not equal balance at all times.",
-                actionStep: "Ask yourself: right now, is the block more external (I don't know what to do) or internal (something in me is resisting)? That tells you which layer to attend to first.",
-                closing: "The journey is the destination."
-            }
+            goal: { title: "This Looks Like a Goal", subtitle: "What you're pursuing has the structure of a goal or project—clear, achievable, and plannable.", meaning: "A goal is a specific outcome you can define, measure, and achieve with the right effort and discipline. The path is largely visible, the obstacles are knowable, and you're essentially the right person to do this—you just need to execute.", implications: "You can use traditional project management and goal-setting tools here. Break it down, set milestones, find accountability, and execute. The main risk is inconsistency—not showing up.", keyInsight: "Success here is mostly about consistency. The gap between where you are and where you want to be is crossable with sustained effort and the right structure.", whatNowIntro: "For goals, the path forward is usually clear—you just need to walk it.", actionStep: "Identify the single most important next action and schedule it. Then find an accountability partner or system to help you stay consistent.", closing: "The path is clear. Now walk it." },
+            quest: { title: "You're On a Quest", subtitle: "What you're undertaking has the structure of a quest—a longer journey through uncertain territory.", meaning: "A quest contains many goals, but it's more than any single goal. The destination may be somewhat clear, but the path is not. You'll encounter obstacles you can't predict, and some of them will require you to grow and adapt.", implications: "Traditional goal-setting tools will help, but they're not enough. You need ways to navigate uncertainty, make decisions with incomplete information, and stay connected to why this matters when the path gets murky.", keyInsight: "On a quest, 'failure' looks different. Testing things that don't work isn't failing—it's navigation. The real risk is standing still, or using all your energy on busy work that doesn't move you forward.", whatNowIntro: "For quests, the first step isn't always obvious—and that's okay.", actionStep: "Instead of planning the whole path, identify one small experiment you can run in the next week to learn something you don't currently know about your quest.", closing: "You're not failing. You're on a quest." },
+            hero: { title: "You're Answering a Deeper Call", subtitle: "What you're pursuing has the structure of a hero's journey—a transformational passage that will remake you.", meaning: "This isn't just about getting somewhere or even about the journey. It's about who you'll become. Something is calling you that won't let go, and you sense—even if you can't fully articulate it—that you can't get there as who you currently are.", implications: "This journey will break you open, and that's not a bug—it's a feature. The obstacles aren't just things to overcome; they're the very mechanisms of your transformation. You'll need allies who can see you clearly, who won't let you hide from yourself.", keyInsight: "The call is real, even when you can't fully explain it. The discomfort you feel isn't a sign that something is wrong—it's a sign that something is trying to emerge.", whatNowIntro: "For hero's journeys, the first step is often internal, not external.", actionStep: "Find one person who can witness your journey without trying to fix it—someone who can simply be present as you navigate this passage. You don't have to do this alone.", closing: "The call is real. Answer it." },
+            mixed: { title: "Your Journey Has Multiple Layers", subtitle: "What you're pursuing has elements of both quest and deeper transformation.", meaning: "Your scores suggest this isn't a simple goal, but something more complex—part quest, part hero's journey. This is common for significant life undertakings.", implications: "You'll need to work on multiple levels: the practical decisions and navigation of the outer journey, and the beliefs, identity, and inner work of the transformation. Neither can be skipped.", keyInsight: "Sometimes you need to solve the practical problem. Sometimes you need to sit with the inner one. Learning to discern which is which—that's the skill to develop.", whatNowIntro: "For layered journeys, balance is key—but not equal balance at all times.", actionStep: "Ask yourself: right now, is the block more external (I don't know what to do) or internal (something in me is resisting)? That tells you which layer to attend to first.", closing: "The journey is the destination." }
         };
 
         const struggleResults = {
-            execution: {
-                intro: "Your primary struggle appears to be around execution.",
-                meaning: "You often know what to do—the challenge is making yourself do it. Focus, discipline, momentum, and consistency are where you get stuck. This is about habits, energy management, and accountability. The good news: this is the most addressable type of struggle. Systems, structure, and support can make a real difference here."
-            },
-            navigation: {
-                intro: "Your primary struggle appears to be around navigation.",
-                meaning: "You could probably force yourself to work—but you're less sure you're working on the right things. Decision fatigue, uncertainty, and the question of 'what should I actually do?' are where you get stuck. This is about clarity, direction, and wayfinding. You need frameworks for making decisions with incomplete information, and ways to test your assumptions without betting everything on them."
-            },
-            transformation: {
-                intro: "Your primary struggle appears to be around inner work.",
-                meaning: "The external challenges may be real, but the deeper friction is internal—beliefs, self-doubt, identity, hope. This is about who you're becoming and what you're willing to let go of. You may need support that goes beyond tactics and productivity—space to process, reflect, and grow into the person who can carry this forward."
-            },
-            mixed: {
-                intro: "Your struggle spans multiple dimensions.",
-                meaning: "You're navigating challenges in execution, direction, and inner work simultaneously. This is typical of quests—the layers compound. The good news: progress in one area often unlocks the others. When you're stuck on execution, sometimes the real block is an internal one. When you can't decide, sometimes you need to just act and learn. The skill is recognizing which layer needs attention in each moment."
-            }
+            execution: { intro: "Your primary struggle appears to be around execution.", meaning: "You often know what to do—the challenge is making yourself do it. Focus, discipline, momentum, and consistency are where you get stuck." },
+            navigation: { intro: "Your primary struggle appears to be around navigation.", meaning: "You could probably force yourself to work—but you're less sure you're working on the right things. Decision fatigue, uncertainty, and the question of 'what should I actually do?' are where you get stuck." },
+            transformation: { intro: "Your primary struggle appears to be around inner work.", meaning: "The external challenges may be real, but the deeper friction is internal—beliefs, self-doubt, identity, hope." },
+            mixed: { intro: "Your struggle spans multiple dimensions.", meaning: "You're navigating challenges in execution, direction, and inner work simultaneously. This is typical of quests—the layers compound." }
         };
 
         function startQuiz() {
@@ -1425,17 +599,9 @@
         }
 
         function showQuestion(num) {
-            // Hide all questions
-            document.querySelectorAll('.question-section').forEach(q => {
-                q.classList.remove('active');
-            });
-            
-            // Show current question
+            document.querySelectorAll('.question-section').forEach(q => q.classList.remove('active'));
             const questionEl = document.getElementById('q' + num);
-            if (questionEl) {
-                questionEl.classList.add('active');
-            }
-            
+            if (questionEl) questionEl.classList.add('active');
             currentQuestion = num;
             updateProgress();
             updateNavButtons();
@@ -1450,49 +616,18 @@
         function updateNavButtons() {
             const backBtn = document.getElementById('btn-back');
             const nextBtn = document.getElementById('btn-next');
-            
-            // Show/hide back button
-            if (currentQuestion <= 0) {
-                backBtn.classList.add('btn-hidden');
-            } else {
-                backBtn.classList.remove('btn-hidden');
-            }
-            
-            // Update next button text
-            if (currentQuestion >= 14) {
-                nextBtn.textContent = 'See My Results';
-            } else {
-                nextBtn.textContent = 'Continue';
-            }
+            if (currentQuestion <= 0) backBtn.classList.add('btn-hidden'); else backBtn.classList.remove('btn-hidden');
+            if (currentQuestion >= 14) nextBtn.textContent = 'See My Results'; else nextBtn.textContent = 'Continue';
         }
 
         function nextQuestion() {
-            if (currentQuestion >= 14) {
-                calculateResults();
-                showResults();
-            } else {
-                showQuestion(currentQuestion + 1);
-            }
+            if (currentQuestion >= 14) { calculateResults(); showResults(); } else { showQuestion(currentQuestion + 1); }
         }
 
-        function prevQuestion() {
-            if (currentQuestion > 0) {
-                showQuestion(currentQuestion - 1);
-            }
-        }
+        function prevQuestion() { if (currentQuestion > 0) showQuestion(currentQuestion - 1); }
 
         function calculateResults() {
-            // Reset scores
-            scores = {
-                goal: 0,
-                quest: 0,
-                hero: 0,
-                execution: 0,
-                navigation: 0,
-                transformation: 0
-            };
-
-            // Count all checked inputs (excluding q0 which is text)
+            scores = { goal: 0, quest: 0, hero: 0, execution: 0, navigation: 0, transformation: 0 };
             document.querySelectorAll('.question-section:not(#q0) input:checked').forEach(input => {
                 const type = input.dataset.type;
                 if (type === 'goal') scores.goal++;
@@ -1506,74 +641,48 @@
 
         function collectAllAnswers() {
             const answers = {};
-            
-            // Get quest description
             answers.quest_description = document.getElementById('quest-description').value || '(not provided)';
-            
-            // Collect all checked answers with their labels
             for (let i = 1; i <= 14; i++) {
                 const questionEl = document.getElementById('q' + i);
                 if (questionEl) {
                     const checked = questionEl.querySelectorAll('input:checked');
                     const labels = [];
-                    checked.forEach(input => {
-                        labels.push(input.dataset.label || input.value);
-                    });
+                    checked.forEach(input => labels.push(input.dataset.label || input.value));
                     answers['q' + i] = labels.join('; ') || '(no selection)';
                 }
             }
-            
             return answers;
         }
 
         function showResults() {
-            // Hide quiz elements
-            document.querySelectorAll('.question-section').forEach(q => {
-                q.classList.remove('active');
-            });
+            document.querySelectorAll('.question-section').forEach(q => q.classList.remove('active'));
             document.getElementById('progress-container').style.display = 'none';
             document.getElementById('nav-buttons').style.display = 'none';
 
-            // Calculate percentages for journey type
             const journeyTotal = scores.goal + scores.quest + scores.hero;
             const goalPercent = journeyTotal > 0 ? Math.round((scores.goal / journeyTotal) * 100) : 0;
             const questPercent = journeyTotal > 0 ? Math.round((scores.quest / journeyTotal) * 100) : 0;
             const heroPercent = journeyTotal > 0 ? Math.round((scores.hero / journeyTotal) * 100) : 0;
 
-            // Calculate percentages for struggle type
             const struggleTotal = scores.execution + scores.navigation + scores.transformation;
             const execPercent = struggleTotal > 0 ? Math.round((scores.execution / struggleTotal) * 100) : 0;
             const navPercent = struggleTotal > 0 ? Math.round((scores.navigation / struggleTotal) * 100) : 0;
             const transPercent = struggleTotal > 0 ? Math.round((scores.transformation / struggleTotal) * 100) : 0;
 
-            // Determine primary journey type
-            let journeyType = 'quest'; // default
-            if (scores.goal > scores.quest && scores.goal > scores.hero) {
-                journeyType = 'goal';
-            } else if (scores.hero > scores.goal && scores.hero >= scores.quest) {
-                journeyType = 'hero';
-            } else if (scores.quest >= scores.goal && scores.quest >= scores.hero) {
-                journeyType = 'quest';
-            }
+            let journeyType = 'quest';
+            if (scores.goal > scores.quest && scores.goal > scores.hero) journeyType = 'goal';
+            else if (scores.hero > scores.goal && scores.hero >= scores.quest) journeyType = 'hero';
+            else if (scores.quest >= scores.goal && scores.quest >= scores.hero) journeyType = 'quest';
             
-            // Check for mixed results
             const maxJourney = Math.max(scores.goal, scores.quest, scores.hero);
             const journeyScores = [scores.goal, scores.quest, scores.hero].filter(s => s >= maxJourney * 0.7);
-            if (journeyScores.length > 1 && journeyType !== 'goal') {
-                journeyType = 'mixed';
-            }
+            if (journeyScores.length > 1 && journeyType !== 'goal') journeyType = 'mixed';
 
-            // Determine primary struggle type
-            let struggleType = 'mixed'; // default
-            if (scores.execution > scores.navigation && scores.execution > scores.transformation) {
-                struggleType = 'execution';
-            } else if (scores.navigation > scores.execution && scores.navigation > scores.transformation) {
-                struggleType = 'navigation';
-            } else if (scores.transformation > scores.execution && scores.transformation > scores.navigation) {
-                struggleType = 'transformation';
-            }
+            let struggleType = 'mixed';
+            if (scores.execution > scores.navigation && scores.execution > scores.transformation) struggleType = 'execution';
+            else if (scores.navigation > scores.execution && scores.navigation > scores.transformation) struggleType = 'navigation';
+            else if (scores.transformation > scores.execution && scores.transformation > scores.navigation) struggleType = 'transformation';
 
-            // Update UI with results
             const result = journeyResults[journeyType];
             const struggle = struggleResults[struggleType];
 
@@ -1585,11 +694,9 @@
             document.getElementById('what-now-intro').textContent = result.whatNowIntro;
             document.getElementById('action-step-text').textContent = result.actionStep;
             document.getElementById('closing-text').textContent = '"' + result.closing + '"';
-
             document.getElementById('struggle-intro').textContent = struggle.intro;
             document.getElementById('struggle-meaning').textContent = struggle.meaning;
 
-            // Update score bars (with slight delay for animation)
             setTimeout(() => {
                 document.getElementById('goal-bar').style.width = goalPercent + '%';
                 document.getElementById('quest-bar').style.width = questPercent + '%';
@@ -1606,10 +713,7 @@
             document.getElementById('nav-percent').textContent = navPercent + '%';
             document.getElementById('trans-percent').textContent = transPercent + '%';
 
-            // Collect all answers for Formspree
             const allAnswers = collectAllAnswers();
-
-            // Update hidden form fields for Formspree
             document.getElementById('form-journey-type').value = journeyType;
             document.getElementById('form-goal-score').value = goalPercent;
             document.getElementById('form-quest-score').value = questPercent;
@@ -1621,71 +725,50 @@
             document.getElementById('form-quest-description').value = allAnswers.quest_description;
             document.getElementById('form-all-answers').value = JSON.stringify(allAnswers);
 
-            // Show results section
             document.getElementById('results').classList.add('active');
-            
-            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            // Submit anonymous data to Formspree (no email)
             submitAnonymousData();
         }
         
         function submitAnonymousData() {
             const form = document.getElementById('anonymous-data-form');
-            const formData = new FormData(form);
-            
-            fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            }).then(response => {
-                console.log('Anonymous data submitted successfully');
-            }).catch(error => {
-                console.log('Data submission error (non-critical):', error);
-            });
+            const data = {
+                journey_type: document.getElementById('form-journey-type').value,
+                goal_score: document.getElementById('form-goal-score').value,
+                quest_score: document.getElementById('form-quest-score').value,
+                hero_score: document.getElementById('form-hero-score').value,
+                execution_score: document.getElementById('form-exec-score').value,
+                navigation_score: document.getElementById('form-nav-score').value,
+                transformation_score: document.getElementById('form-trans-score').value,
+                struggle_type: document.getElementById('form-struggle-type').value,
+                quest_description: document.getElementById('form-quest-description').value,
+                all_answers: document.getElementById('form-all-answers').value
+            };
+            fetch(form.action, { 
+                method: 'POST', 
+                body: JSON.stringify(data), 
+                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' } 
+            })
+            .then(response => console.log('Anonymous data submitted successfully'))
+            .catch(error => console.log('Data submission error (non-critical):', error));
         }
 
         function retakeQuiz() {
-            // Reset all inputs
             document.querySelectorAll('.question-section input').forEach(input => {
-                if (input.type === 'checkbox' || input.type === 'radio') {
-                    input.checked = false;
-                } else {
-                    input.value = '';
-                }
+                if (input.type === 'checkbox' || input.type === 'radio') input.checked = false;
+                else input.value = '';
             });
-
-            // Reset scores
-            scores = {
-                goal: 0,
-                quest: 0,
-                hero: 0,
-                execution: 0,
-                navigation: 0,
-                transformation: 0
-            };
-
-            // Hide results
+            scores = { goal: 0, quest: 0, hero: 0, execution: 0, navigation: 0, transformation: 0 };
             document.getElementById('results').classList.remove('active');
-
-            // Show intro
             document.getElementById('intro').classList.add('active');
-            
-            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Limit multi-select to 3 for specific questions
         document.querySelectorAll('#q5 input, #q11 input').forEach(checkbox => {
             checkbox.addEventListener('change', function() {
                 const parent = this.closest('.question-section');
                 const checked = parent.querySelectorAll('input:checked');
-                if (checked.length > 3) {
-                    this.checked = false;
-                }
+                if (checked.length > 3) this.checked = false;
             });
         });
     </script>
